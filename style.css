@@ -115,6 +115,20 @@ h6 {
     width: 82%;
 }
 
+#my_password_faculty {
+    width: 82%;
+}
+
+
+.forgot-password-div {
+    margin-top: 3%;
+    margin-left: 37%;
+}
+
+.forgot-pass-label:hover {
+    color: blue;
+}
+
 .button-container {
     margin-top: 20px;
     text-align: center;
@@ -122,4 +136,25 @@ h6 {
 
 #my_button {
     width: 82%;
+}
+
+/*index css*/
+.pick-student {
+    background-color: dodgerblue;
+    color: white;
+    margin-top: 18%;
+    padding-left: 45%;
+    padding-right: 45%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.pick-faculty {
+    background-color: tomato;
+    color: white;
+    margin-top: 7%;
+    padding-left: 45%;
+    padding-right: 45%;
+    padding-top: 2%;
+    padding-bottom: 2%;
 }
