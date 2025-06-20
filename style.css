@@ -3,6 +3,13 @@
     margin: 0px;
 }
 
+body {
+    background-image: url(./assets/tnhs\ 1.png);
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 #background_cover {
     position: absolute;
     width: 100%;
@@ -13,14 +20,13 @@
     position: absolute;
     border: solid 0px;
     border-radius: 5px;
-    height: 70%;
+    height: 97.3%;
     top: 50%;
-    left: 50%;
+    left: 84.3%;
     transform: translate(-50%, -50%);
     width: 30%;
-    background-color: rgba(154, 147, 147, 0.8);
+    background-color: #D9D9D9;
     padding: 10px;
-
 }
 
 .logo-container{
@@ -31,19 +37,58 @@
 
 #logo_container {
     position: absolute;
-    width: 60px;
+    width: 200px;
     height: 6;
-    align-items: center;
-}
-
-#logo_container img {
-    opacity: 0.8;
-    border-radius: 50%;
+    margin-left: -70px;
 }
 
 .header {
-    margin-top: 25%;
+    margin-top: 50%;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header :nth-child(1) {
+    font-size:x-large;
+    font-weight: 900;
+}
+
+.header :nth-child(2) {
+    margin-top: 30px;
+    font-size: larger;
+}
+
+.pick-student {
+    background-color: #8376C3;
+    color: white;
+    font-size: larger;
+    font-weight: 600;
+    margin-top: 18%;
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 0;
+}
+
+.pick-faculty {
+    background-color: #3db534;
+    color: white;
+    font-size: larger;
+    font-weight: 600;
+    margin-top: 7%;
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 0;
+}
+
+.pick-student:hover {
+    background-color: #645c8e;
+    cursor: pointer;
+}
+
+.pick-faculty:hover {
+    background-color: #30612c;
 }
 
 .header-3 {
@@ -136,25 +181,4 @@ h6 {
 
 #my_button {
     width: 82%;
-}
-
-/*index css*/
-.pick-student {
-    background-color: dodgerblue;
-    color: white;
-    margin-top: 18%;
-    padding-left: 45%;
-    padding-right: 45%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-}
-
-.pick-faculty {
-    background-color: tomato;
-    color: white;
-    margin-top: 7%;
-    padding-left: 45%;
-    padding-right: 45%;
-    padding-top: 2%;
-    padding-bottom: 2%;
 }
