@@ -4,7 +4,7 @@
 }
 
 body {
-    background-image: url(./assets/tnhs\ 1.png);
+    background-image: url(../assets/tnhs-1.png);
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
@@ -89,96 +89,4 @@ body {
 
 .pick-faculty:hover {
     background-color: #30612c;
-}
-
-.header-3 {
-    margin-top: 2px;
-    text-align: center;
-}
-
-h6 {
-    font-weight: normal;
-    
-}
-
-.student-input-container {
-    margin-top: 10px;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-
-}
-
-.lrn-container {
-    width: 100%;
-    text-align: center;
-}
-
-.birthday-container {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    margin-top: 5px;
-}
-#my_text {
-    border-radius: 2px;
-    border: solid 0px;
-    background-color: rgb(254, 233, 233);
-    color: white;
-    width: 80%;
-    height: 30%;
-    padding: 5px;
-}
-
-.month-input-container { 
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-}
-
-.day-input-container {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-}
-
-#month_input_container {
-    width: 100%;
-}
-
-#day_input_container {
-    width: 100%;
-}
-
-.password {
-    margin-top: 10px;
-    text-align: center;
-}
-
-#my_password {
-    width: 82%;
-}
-
-#my_password_faculty {
-    width: 82%;
-}
-
-
-.forgot-password-div {
-    margin-top: 3%;
-    margin-left: 37%;
-}
-
-.forgot-pass-label:hover {
-    color: blue;
-}
-
-.button-container {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#my_button {
-    width: 82%;
 }
