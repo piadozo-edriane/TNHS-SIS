@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="./styles/student_dashboard.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="logo-title">
+            <img src="../assets/tnhs-logo.png" alt="TNHS Logo" class="dashboard-logo">
+            <span class="dashboard-title">TNHS-SIS</span>
+        </div>
+        <nav class="dashboard-nav">
+            <a href="student_dashboard.html" class="active">Home</a>
+            <a href="profile.html">Profile</a>
+            <a href="grade.html">Grade</a>
+            <a href="schedule.html">Schedule</a>
+        </nav>
+        <div class="dashboard-avatar">
+            <img src="../assets/tnhs-1.png" alt="User Avatar">
+        </div>
+    </header>
+    <main class="dashboard-main">
+        <h2>Home</h2>
+        <div class="student-info">
+            <span class="student-name">Cruz, Juan Dela (198765150721)</span>
+        </div>
+        <h3>Student Dashboard</h3>
+        <div class="dashboard-cards">
+            <div class="dashboard-card profile-info">
+                <h4>Profile Information</h4>
+                <p><b>Name:</b> Cruz, Juan Dela</p>
+                <p><b>LRN:</b> 198765150721</p>
+                <p><b>Grade & Section:</b> 10 - A</p>
+                <button>View Full Profile</button>
+            </div>
+            <div class="dashboard-card grade-summary">
+                <h4>Grade Summary</h4>
+                <table>
+                    <tr><th>Subject</th><th>Grade</th></tr>
+                    <tr><td>Science</td><td>90</td></tr>
+                    <tr><td>English</td><td>95</td></tr>
+                </table>
+                <button>View All Grades</button>
+            </div>
+            <div class="dashboard-card class-schedule">
+                <h4>Class Schedule</h4>
+                <table>
+                    <tr><th>Time</th><th>Subject</th><th>Room</th></tr>
+                    <tr><td>7:00-8:00 AM</td><td>Science</td><td>301</td></tr>
+                    <tr><td>8:00-9:00 AM</td><td>English</td><td>301</td></tr>
+                </table>
+                <button>View All Schedule</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html> 
