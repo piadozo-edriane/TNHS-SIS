@@ -1,0 +1,179 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #e5e5e5;
+}
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 10px 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.dashboard-logo {
+    width: 50px;
+    height: 50px;
+}
+.dashboard-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #7b7bc0;
+    letter-spacing: 1px;
+}
+.dashboard-nav {
+    display: flex;
+    gap: 30px;
+}
+.dashboard-nav a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+}
+.dashboard-nav a.active, .dashboard-nav a:hover {
+    background: #7b7bc0;
+    color: #fff;
+}
+.dashboard-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
+.dashboard-main {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: #f7f7f7;
+    border-radius: 10px;
+    padding: 30px 40px 40px 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.faculty-info {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #444;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 8px;
+}
+.dashboard-main h2 {
+    margin-top: 0;
+    color: #222;
+}
+.dashboard-main h3 {
+    color: #7b7bc0;
+    margin-bottom: 25px;
+}
+.dashboard-cards {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.dashboard-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 22px 18px 18px 18px;
+    flex: 1 1 0;
+    min-width: 220px;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1.5px solid #ccc;
+}
+.dashboard-card h4 {
+    margin-top: 0;
+    color: #7b7bc0;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: #f7f7f7;
+    width: 100%;
+    text-align: center;
+    padding: 8px 0 6px 0;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1.5px solid #ccc;
+}
+.dashboard-value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #444;
+    margin: 10px 0 12px 0;
+}
+.dashboard-card button {
+    background: #7b7bc0;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+    font-weight: 500;
+    width: 90%;
+    max-width: 180px;
+    box-shadow: 0 1px 4px rgba(123,123,192,0.08);
+}
+.dashboard-card button:hover {
+    background: #5a5a99;
+}
+.quick-actions {
+    margin-top: 30px;
+    background: #e5e5e5;
+    border-radius: 8px;
+    padding: 18px 0 18px 0;
+    box-shadow: 0 1px 4px rgba(123,123,192,0.04);
+    text-align: center;
+}
+.quick-actions h4 {
+    color: #7b7bc0;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.quick-actions-buttons {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.quick-actions-buttons button {
+    background: #7b7bc0;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 1px 4px rgba(123,123,192,0.08);
+    margin-bottom: 8px;
+    transition: background 0.2s;
+}
+.quick-actions-buttons button:hover {
+    background: #5a5a99;
+}
+@media (max-width: 900px) {
+    .dashboard-cards {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .dashboard-main {
+        padding: 18px 6vw 24px 6vw;
+    }
+    .quick-actions-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+} 
