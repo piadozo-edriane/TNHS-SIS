@@ -7,9 +7,25 @@
     <link rel="stylesheet" href="./styles/student_dashboard.css">
 </head>
 <body>
+    <header class="dashboard-header">
+        <div class="logo-title">
+            <img src="../assets/tnhs-logo.png" alt="TNHS Logo" class="dashboard-logo">
+            <span class="dashboard-title">TNHS-SIS</span>
+        </div>
+        <nav class="dashboard-nav">
+            <a href="student_dashboard.html">Home</a>
+            <a href="profile.html">Profile</a>
+            <a href="grade.html" class="active">Grade</a>
+            <a href="schedule.html">Schedule</a>
+        </nav>
+        <div class="dashboard-avatar">
+            <img src="../assets/tnhs-1.png" alt="User Avatar">
+            <button onclick="logoutStudent()" class="logout-btn">Logout</button>
+        </div>
+    </header>
     <main class="dashboard-main">
         <h2>Grade Summary</h2>
-        <table class="dashboard-table">
+        <table class="dashboard-table" id="grade-table">
             <thead>
                 <tr>
                     <th>Subject</th>
@@ -20,25 +36,12 @@
                     <th>Final Grade</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Science</td>
-                    <td>90</td>
-                    <td>92</td>
-                    <td>91</td>
-                    <td>93</td>
-                    <td>92</td>
-                </tr>
-                <tr>
-                    <td>English</td>
-                    <td>95</td>
-                    <td>94</td>
-                    <td>96</td>
-                    <td>97</td>
-                    <td>96</td>
-                </tr>
+            <tbody id="grade-table-body">
+                <tr><td colspan="6">Loading...</td></tr>
             </tbody>
         </table>
     </main>
+    <script src="./scripts/session_check.js"></script>
+    <script src="./scripts/grade.js"></script>
 </body>
 </html>
