@@ -7,17 +7,33 @@
     <link rel="stylesheet" href="./styles/student_dashboard.css">
 </head>
 <body>
+    <header class="dashboard-header">
+        <div class="logo-title">
+            <img src="../assets/tnhs-logo.png" alt="TNHS Logo" class="dashboard-logo">
+            <span class="dashboard-title">TNHS-SIS</span>
+        </div>
+        <nav class="dashboard-nav">
+            <a href="student_dashboard.html">Home</a>
+            <a href="profile.html" class="active">Profile</a>
+            <a href="grade.html">Grade</a>
+            <a href="schedule.html">Schedule</a>
+        </nav>
+        <div class="dashboard-avatar">
+            <img src="../assets/tnhs-1.png" alt="User Avatar">
+            <button onclick="logoutStudent()" class="logout-btn">Logout</button>
+        </div>
+    </header>
     <main class="dashboard-main">
         <h2>Profile Information</h2>
         <table class="dashboard-table">
             <tbody>
                 <tr>
                     <th>Name</th>
-                    <td>Cruz, Juan Dela</td>
+                    <td id="profile-name">Loading...</td>
                 </tr>
                 <tr>
                     <th>LRN</th>
-                    <td>198765150721</td>
+                    <td id="profile-lrn">Loading...</td>
                 </tr>
                 <tr>
                     <th>Grade & Section</th>
@@ -25,7 +41,7 @@
                 </tr>
                 <tr>
                     <th>Birthday</th>
-                    <td>January 1, 2005</td>
+                    <td id="profile-birthday">Loading...</td>
                 </tr>
                 <tr>
                     <th>Address</th>
@@ -33,6 +49,32 @@
                 </tr>
             </tbody>
         </table>
+        <div style="margin-top: 20px;">
+            <button onclick="window.location.href='student_dashboard.html'" style="background: #7b7bc0; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+                Back to Dashboard
+            </button>
+        </div>
     </main>
+    
+    <script src="./scripts/session_check.js"></script>
+    <script>
+        // Update profile with student information
+        document.addEventListener('DOMContentLoaded', function() {
+            const student = getCurrentStudent();
+            if (student) {
+                // Update profile information
+                const profileNameElement = document.getElementById('profile-name');
+                const profileLrnElement = document.getElementById('profile-lrn');
+                const profileBirthdayElement = document.getElementById('profile-birthday');
+                
+                const fullName = `${student.last_name}, ${student.first_name} ${student.middle_name || ''} ${student.extension_name || ''}`.trim();
+                
+                profileNameElement.textContent = fullName;
+                profileLrnElement.textContent = student.lrn;
+                // Note: Birth date would need to be fetched from database if needed
+                profileBirthdayElement.textContent = 'Not available';
+            }
+        });
+    </script>
 </body>
 </html>

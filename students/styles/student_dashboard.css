@@ -50,6 +50,29 @@ body {
     object-fit: cover;
     border: 2px solid #ccc;
 }
+
+.dashboard-avatar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-btn {
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: 500;
+}
+
+.logout-btn:hover {
+    background: #c82333;
+}
+
 .dashboard-main {
     max-width: 1100px;
     margin: 30px auto;
@@ -167,6 +190,36 @@ body {
 .class-schedule h4 {
     color: #7b7bc0;
 }
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.dashboard-table th, .dashboard-table td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.dashboard-table th {
+    background: #7b7bc0;
+    color: #fff;
+    font-weight: 600;
+    width: 30%;
+}
+
+.dashboard-table td {
+    background: #f9f9f9;
+    color: #333;
+}
+
 @media (max-width: 900px) {
     .dashboard-cards {
         flex-direction: column;
