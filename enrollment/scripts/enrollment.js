@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 barangay: document.getElementById('current_barangay').value,
                 municipality: document.getElementById('current_municipality').value,
                 province: document.getElementById('current_province').value,
-                country: document.getElementById('current_country').value,
                 zip_code: document.getElementById('current_zip_code').value
             },
             same_address: document.querySelector('input[name="same_address"]:checked')?.value,
@@ -63,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 barangay: document.getElementById('permanent_barangay')?.value || '',
                 municipality: document.getElementById('permanent_municipality')?.value || '',
                 province: document.getElementById('permanent_province')?.value || '',
-                country: document.getElementById('permanent_country')?.value || '',
                 zip_code: document.getElementById('permanent_zip_code')?.value || ''
             },
             father: {
@@ -100,7 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 educational_tv: document.getElementById('educational_tv').checked,
                 homeschooling: document.getElementById('homeschooling').checked
             },
-            signature: document.getElementById('signature').files[0]
+            signature: document.getElementById('signature').files[0],
+            date: document.getElementById('date').value
         };
 
         // Validation
@@ -116,6 +115,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!formData.last_name || !formData.first_name || !formData.birthdate || !formData.sex || !formData.age) {
             alert('Please complete required learner information (Last Name, First Name, Birthdate, Sex, Age).');
+            return;
+        }
+
+        if (!formData.birthdate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+            alert('Please select a valid birthdate.');
             return;
         }
 
@@ -164,9 +168,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        if (!formData.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+            alert('Please select a valid certification date.');
+            return;
+        }
+
         console.log('Form Data:', formData);
         alert('Enrollment form submitted successfully!');
-        document.querySelectorAll('input, select').forEach(input => input.value = '');
+        document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]), select').forEach(input => input.value = '');
         document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => input.checked = false);
         document.getElementById('signature').value = '';
         document.querySelectorAll('.conditional').forEach(container => container.style.display = 'none');

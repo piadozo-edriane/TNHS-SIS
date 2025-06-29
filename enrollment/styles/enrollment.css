@@ -144,6 +144,7 @@ body {
 
 input[type="text"],
 input[type="number"],
+input[type="date"],
 select,
 input[type="file"] {
     width: 100%;
@@ -159,6 +160,7 @@ input[type="file"] {
 
 input[type="text"]:focus,
 input[type="number"]:focus,
+input[type="date"]:focus,
 select:focus,
 input[type="file"]:focus {
     outline: none;
@@ -171,6 +173,16 @@ input[type="text"]::placeholder,
 input[type="number"]::placeholder {
     color: #6c757d;
     font-weight: 400;
+}
+
+input[type="date"] {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 2v2m8-2v2M4 8h12M4 6h12v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z'/%3e%3c/svg%3e");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 30px;
+    cursor: pointer;
 }
 
 select {
