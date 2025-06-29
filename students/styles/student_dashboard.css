@@ -98,7 +98,7 @@ body {
 }
 .dashboard-cards {
     display: flex;
-    gap: 30px;
+    gap: 4%;
     justify-content: space-between;
     flex-wrap: wrap;
 }
@@ -108,12 +108,14 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     padding: 22px 18px 18px 18px;
     flex: 1 1 0;
-    min-width: 260px;
-    max-width: 320px;
+    width: 48%;
+    min-width: 0;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1.5px solid #ccc;
+    box-sizing: border-box;
 }
 .dashboard-card h4 {
     margin-top: 0;
@@ -193,6 +195,7 @@ body {
 
 .dashboard-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     margin-bottom: 20px;
     background: #fff;
@@ -202,22 +205,45 @@ body {
 }
 
 .dashboard-table th, .dashboard-table td {
-    border: 1px solid #e0e0e0;
-    padding: 12px 15px;
-    text-align: left;
+    padding: 8px 10px;
+    text-align: center;
     font-size: 1rem;
+    border: 1px solid #e0e0e0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dashboard-table th {
     background: #7b7bc0;
     color: #fff;
     font-weight: 600;
-    width: 30%;
 }
 
 .dashboard-table td {
     background: #f9f9f9;
     color: #333;
+}
+
+.dashboard-table th.time-col { width: 90px; }
+.dashboard-table th.day-col { width: 60px; }
+.dashboard-table th.minutes-col { width: 110px; }
+.dashboard-table th.subject-col { width: 140px; }
+.dashboard-table th.room-col { width: 70px; }
+
+.dashboard-card.class-schedule {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.dashboard-card.class-schedule .dashboard-table {
+    width: 100%;
+    margin: 0 auto;
 }
 
 @media (max-width: 900px) {
@@ -227,5 +253,22 @@ body {
     }
     .dashboard-main {
         padding: 18px 6vw 24px 6vw;
+    }
+    .dashboard-table, .dashboard-table thead, .dashboard-table tbody, .dashboard-table th, .dashboard-table td, .dashboard-table tr {
+        display: block;
+    }
+    .dashboard-table th, .dashboard-table td {
+        min-width: unset;
+        max-width: unset;
+        white-space: normal;
+    }
+    .dashboard-card {
+        width: 100%;
+        min-width: unset;
+        max-width: unset;
+    }
+    .dashboard-card.class-schedule {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

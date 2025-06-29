@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                     <th>Grade & Section</th>
-                    <td>10 - A</td>
+                    <td>10 - Diamond</td>
                 </tr>
                 <tr>
                     <th>Birthday</th>
@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td>Sample Address</td>
+                    <td id="profile-address">Loading...</td>
                 </tr>
             </tbody>
         </table>
@@ -66,13 +66,31 @@
                 const profileNameElement = document.getElementById('profile-name');
                 const profileLrnElement = document.getElementById('profile-lrn');
                 const profileBirthdayElement = document.getElementById('profile-birthday');
+                const profileAddressElement = document.getElementById('profile-address');
                 
                 const fullName = `${student.last_name}, ${student.first_name} ${student.middle_name || ''} ${student.extension_name || ''}`.trim();
                 
                 profileNameElement.textContent = fullName;
                 profileLrnElement.textContent = student.lrn;
-                // Note: Birth date would need to be fetched from database if needed
-                profileBirthdayElement.textContent = 'Not available';
+                profileBirthdayElement.textContent = 'Loading...';
+                profileAddressElement.textContent = 'Loading...';
+
+                // Fetch birthday and address from API
+                fetch(`../api/get_student_profile.php?lrn=${encodeURIComponent(student.lrn)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            profileBirthdayElement.textContent = data.birth_date || 'Not available';
+                            profileAddressElement.textContent = data.address || 'Not available';
+                        } else {
+                            profileBirthdayElement.textContent = 'Not available';
+                            profileAddressElement.textContent = 'Not available';
+                        }
+                    })
+                    .catch(() => {
+                        profileBirthdayElement.textContent = 'Error';
+                        profileAddressElement.textContent = 'Error';
+                    });
             }
         });
     </script>

@@ -34,37 +34,55 @@
                 <h4>Profile Information</h4>
                 <p><b>Name:</b> <span id="profile-name">Loading...</span></p>
                 <p><b>LRN:</b> <span id="profile-lrn">Loading...</span></p>
-                <p><b>Grade & Section:</b> 10 - A</p>
+                <p><b>Grade & Section:</b> 10 - Diamond</p>
                 <button onclick="window.location.href='profile.html'">View Full Profile</button>
             </div>
             <div class="dashboard-card grade-summary">
                 <h4>Grade Summary</h4>
-                <table>
-                    <tr><th>Subject</th><th>Grade</th></tr>
-                    <tr><td>Science</td><td>90</td></tr>
-                    <tr><td>English</td><td>95</td></tr>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr><th>Subject</th><th>Grade</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>English</td><td></td></tr>
+                        <tr><td>EsP</td><td></td></tr>
+                        <tr><td>TLE</td><td></td></tr>
+                        <tr><td>MAPEH</td><td></td></tr>
+                        <tr><td>Science</td><td></td></tr>
+                        <tr><td>Araling Panlipunan</td><td></td></tr>
+                        <tr><td>Mathematics</td><td></td></tr>
+                        <tr><td>Filipino</td><td></td></tr>
+                        <tr><td>HGP</td><td></td></tr>
+                    </tbody>
                 </table>
                 <button onclick="window.location.href='grade.html'">View All Grades</button>
             </div>
-            <div class="dashboard-card class-schedule">
-                <h4>Class Schedule</h4>
-                <table>
-                    <tr><th>Time</th><th>Subject</th><th>Room</th></tr>
-                    <tr><td>7:00-8:00 AM</td><td>Science</td><td>301</td></tr>
-                    <tr><td>8:00-9:00 AM</td><td>English</td><td>301</td></tr>
-                </table>
-                <button onclick="window.location.href='schedule.html'">View All Schedule</button>
-            </div>
+        </div>
+        <div class="dashboard-card class-schedule" style="margin-top: 30px; width: 100%; max-width: 100%;">
+            <h4>Class Schedule</h4>
+            <table class="dashboard-table" id="schedule-table">
+                <thead>
+                    <tr>
+                        <th class="time-col">Time</th>
+                        <th class="day-col">Day</th>
+                        <th class="minutes-col">No. of Minutes</th>
+                        <th class="subject-col">Subject</th>
+                        <th class="room-col">Room</th>
+                    </tr>
+                </thead>
+                <tbody id="schedule-table-body">
+                    <tr><td colspan="5">Loading...</td></tr>
+                </tbody>
+            </table>
+            <button onclick="window.location.href='schedule.html'">View All Schedule</button>
         </div>
     </main>
     
     <script src="./scripts/session_check.js"></script>
     <script>
-        // Update dashboard with student information
         document.addEventListener('DOMContentLoaded', function() {
             const student = getCurrentStudent();
             if (student) {
-                // Update student name display
                 const studentNameElement = document.getElementById('student-name');
                 const profileNameElement = document.getElementById('profile-name');
                 const profileLrnElement = document.getElementById('profile-lrn');
@@ -75,6 +93,29 @@
                 profileNameElement.textContent = fullName;
                 profileLrnElement.textContent = student.lrn;
             }
+
+            fetch('../api/get_class_schedule.php')
+                .then(response => response.json())
+                .then(data => {
+                    const tbody = document.getElementById('schedule-table-body');
+                    if (data.success && data.schedule.length > 0) {
+                        tbody.innerHTML = data.schedule.map(row =>
+                            `<tr>
+                                <td>${row.time}</td>
+                                <td>${row.day}</td>
+                                <td>${row.minutes}</td>
+                                <td>${row.subject_name}</td>
+                                <td>${row.room || ''}</td>
+                            </tr>`
+                        ).join('');
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="5">No schedule found.</td></tr>';
+                    }
+                })
+                .catch(() => {
+                    const tbody = document.getElementById('schedule-table-body');
+                    tbody.innerHTML = '<tr><td colspan="5">Error loading schedule.</td></tr>';
+                });
         });
     </script>
 </body>
