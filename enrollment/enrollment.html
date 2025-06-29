@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/enrollment.css">
+    <title>Enrollment Form - TNHS SIS</title>
+</head>
+<body>
+    <div class="form-container">
+        <div class="logo-container">
+            <img id="logo_container" src="../assets/tnhs-logo.png" alt="TNHS Logo">
+        </div>
+
+         <div class="header">
+            <p><b>TNHS - Enrollment Form</b></p>
+        </div>
+
+        <div class="header-3">
+            <div class="session-label">
+                Complete the Enrollment Details
+            </div>
+        </div>
+        
+        <div class="lrn-returning-section">
+            <p>Check the appropriate box only</p>
+            <div class="checkbox-group-row">
+                <div class="checkbox-group">
+                    <label>1. With LRN?</label>
+                    <label><input type="radio" name="lrn_status" value="yes"> Yes</label>
+                    <label><input type="radio" name="lrn_status" value="no"> No</label>
+                </div>
+                <div class="checkbox-group">
+                    <label>2. Returning (Balik-Aral)</label>
+                    <label><input type="radio" name="returning_status" value="yes"> Yes</label>
+                    <label><input type="radio" name="returning_status" value="no"> No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="student-input-container">
+            <div class="section-title">Learner Information</div>
+            <div class="form-table">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>PSA Birth Certificate No.</label>
+                        <input type="number" id="psa_birth_cert" placeholder="PSA Birth Certificate No.">
+                    </div>
+                    <div class="input-group">
+                        <label>Learner Reference No.</label>
+                        <input type="number" id="lrn" placeholder="Learner Reference No.">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Last Name</label>
+                        <input type="text" id="last_name" placeholder="Last Name">
+                    </div>
+                    <div class="input-group">
+                        <label>First Name</label>
+                        <input type="text" id="first_name" placeholder="First Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Middle Name</label>
+                        <input type="text" id="middle_name" placeholder="Middle Name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Extension Name (e.g., Jr., III)</label>
+                        <input type="text" id="extension_name" placeholder="Extension Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Birthdate (mm/dd/yyyy)</label>
+                        <input type="text" id="birthdate" placeholder="Birthdate (mm/dd/yyyy)">
+                    </div>
+                    <div class="input-group">
+                        <label>Sex</label>
+                        <select id="sex">
+                            <option value="">Select Sex</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" id="age" placeholder="Age">
+                    </div>
+                    <div class="input-group">
+                        <label>Place of Birth (Municipality/City)</label>
+                        <input type="text" id="place_of_birth" placeholder="Place of Birth">
+                    </div>
+                    <div class="input-group">
+                        <label>Mother Tongue</label>
+                        <select id="mother_tongue">
+                            <option value="">Select Mother Tongue</option>
+                            <option value="tagalog">Tagalog</option>
+                            <option value="cebuano">Cebuano</option>
+                            <option value="ilocano">Ilocano</option>
+                            <option value="hiligaynon">Hiligaynon</option>
+                            <option value="bikolano">Bikolano</option>
+                            <option value="waray">Waray</option>
+                            <option value="kapampangan">Kapampangan</option>
+                            <option value="pangasinan">Pangasinan</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="checkbox-group">
+                        <label>Belonging to Indigenous Peoples Community?</label>
+                        <label><input type="radio" name="ip_community" value="yes"> Yes</label>
+                        <label><input type="radio" name="ip_community" value="no"> No</label>
+                        <div class="input-group conditional" id="ip_specify_container">
+                            <input type="text" id="ip_specify" placeholder="Specify Indigenous Community">
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <label>4Ps Beneficiary?</label>
+                        <label><input type="radio" name="four_ps" value="yes"> Yes</label>
+                        <label><input type="radio" name="four_ps" value="no"> No</label>
+                        <div class="input-group conditional" id="four_ps_id_container">
+                            <input type="number" id="four_ps_id" placeholder="4Ps Household ID Number">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="checkbox-group">
+                        <label>Is the child a Learner with Disability?</label>
+                        <label><input type="radio" name="disability" value="yes"> Yes</label>
+                        <label><input type="radio" name="disability" value="no"> No</label>
+                        <div class="checkbox-group conditional" id="disability_types_container">
+                            <label>Specify Disability:</label>
+                            <label><input type="checkbox" name="disability_type" value="visual_impairment_blind"> Blind</label>
+                            <label><input type="checkbox" name="disability_type" value="visual_impairment_low_vision"> Low Vision</label>
+                            <label><input type="checkbox" name="disability_type" value="hearing_impairment"> Hearing Impairment</label>
+                            <label><input type="checkbox" name="disability_type" value="learning_disability"> Learning Disability</label>
+                            <label><input type="checkbox" name="disability_type" value="intellectual_disability"> Intellectual Disability</label>
+                            <label><input type="checkbox" name="disability_type" value="autism_spectrum"> Autism Spectrum Disorder</label>
+                            <label><input type="checkbox" name="disability_type" value="emotional_behavioral"> Emotional-Behavioral Disorder</label>
+                            <label><input type="checkbox" name="disability_type" value="orthopedic_physical"> Orthopedic/Physical Handicap</label>
+                            <label><input type="checkbox" name="disability_type" value="speech_language"> Speech/Language Disorder</label>
+                            <label><input type="checkbox" name="disability_type" value="cerebral_palsy"> Cerebral Palsy</label>
+                            <label><input type="checkbox" name="disability_type" value="special_health"> Special Health Problem/Chronic Disease</label>
+                            <label><input type="checkbox" name="disability_type" value="multiple_disorder"> Multiple Disorder</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-border"></div>
+
+            <div class="section-title">Current Address</div>
+            <div class="form-table">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>House No.</label>
+                        <input type="text" id="current_house_no" placeholder="House No.">
+                    </div>
+                    <div class="input-group">
+                        <label>Sitio/Street Name</label>
+                        <input type="text" id="current_sitio_street" placeholder="Sitio/Street Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Barangay</label>
+                        <input type="text" id="current_barangay" placeholder="Barangay">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Municipality/City</label>
+                        <input type="text" id="current_municipality" placeholder="Municipality/City">
+                    </div>
+                    <div class="input-group">
+                        <label>Province</label>
+                        <input type="text" id="current_province" placeholder="Province">
+                    </div>
+                    <div class="input-group">
+                        <label>Zip Code</label>
+                        <input type="text" id="current_zip_code" placeholder="Zip Code">
+                    </div>
+                </div>
+            </div>
+            <div class="section-border"></div>
+
+            <div class="section-title">Permanent Address</div>
+            <div class="checkbox-group">
+                <label>Same as Current Address?</label>
+                <label><input type="radio" name="same_address" value="yes"> Yes</label>
+                <label><input type="radio" name="same_address" value="no"> No</label>
+            </div>
+            <div class="form-table conditional" id="permanent_address_container">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>House No.</label>
+                        <input type="text" id="permanent_house_no" placeholder="House No.">
+                    </div>
+                    <div class="input-group">
+                        <label>Sitio/Street Name</label>
+                        <input type="text" id="permanent_sitio_street" placeholder="Sitio/Street Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Barangay</label>
+                        <input type="text" id="permanent_barangay" placeholder="Barangay">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Municipality/City</label>
+                        <input type="text" id="permanent_municipality" placeholder="Municipality/City">
+                    </div>
+                    <div class="input-group">
+                        <label>Province</label>
+                        <input type="text" id="permanent_province" placeholder="Province">
+                    </div>
+                    <div class="input-group">
+                        <label>Zip Code</label>
+                        <input type="text" id="permanent_zip_code" placeholder="Zip Code">
+                    </div>
+                </div>
+            </div>
+            <div class="section-border"></div>
+
+            <div class="section-title">Parent/Guardian Information</div>
+            <div class="form-table">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Father's Last Name</label>
+                        <input type="text" id="father_last_name" placeholder="Last Name">
+                    </div>
+                    <div class="input-group">
+                        <label>First Name</label>
+                        <input type="text" id="father_first_name" placeholder="First Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Middle Name</label>
+                        <input type="text" id="father_middle_name" placeholder="Middle Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Contact Number</label>
+                        <input type="number" id="father_contact" placeholder="Contact Number">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Mother's Maiden Last Name</label>
+                        <input type="text" id="mother_last_name" placeholder="Last Name">
+                    </div>
+                    <div class="input-group">
+                        <label>First Name</label>
+                        <input type="text" id="mother_first_name" placeholder="First Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Middle Name</label>
+                        <input type="text" id="mother_middle_name" placeholder="Middle Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Contact Number</label>
+                        <input type="number" id="mother_contact" placeholder="Contact Number">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Legal Guardian Last Name</label>
+                        <input type="text" id="guardian_last_name" placeholder="Last Name">
+                    </div>
+                    <div class="input-group">
+                        <label>First Name</label>
+                        <input type="text" id="guardian_first_name" placeholder="First Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Middle Name</label>
+                        <input type="text" id="guardian_middle_name" placeholder="Middle Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Contact Number</label>
+                        <input type="number" id="guardian_contact" placeholder="Contact Number">
+                    </div>
+                </div>
+            </div>
+            <div class="section-border"></div>
+
+            <div class="section-title">Additional Information</div>
+            <div class="form-table">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>School Year</label>
+                        <input type="text" id="school_year" placeholder="School Year (e.g., 2025-2026)">
+                    </div>
+                    <div class="input-group">
+                        <label>Grade Level to Enroll</label>
+                        <input type="text" id="grade_level" placeholder="Grade Level">
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="section-subtitle">For Returning Learner (Balik-Aral) and Those Who Will Transfer/Move In</div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Last Grade Level Completed</label>
+                            <input type="text" id="last_grade_level" placeholder="Last Grade Level Completed">
+                        </div>
+                        <div class="input-group">
+                            <label>Last School Year Completed</label>
+                            <input type="text" id="last_school_year" placeholder="Last School Year">
+                        </div>
+                        <div class="input-group">
+                            <label>Last School Attended</label>
+                            <input type="text" id="last_school_attended" placeholder="Last School Attended">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>School ID</label>
+                            <input type="text" id="school_id" placeholder="School ID">
+                        </div>
+                    </div>
+                </div>
+                <div class="section-border"></div>
+                <div class="form-section">
+                    <div class="section-subtitle">For Learners in Senior High School</div>
+                    <div class="form-row">
+                        <div class="checkbox-group">
+                            <label>Semester</label>
+                            <label><input type="radio" name="semester" value="1st"> 1st</label>
+                            <label><input type="radio" name="semester" value="2nd"> 2nd</label>
+                        </div>
+                        <div class="input-group">
+                            <label>Track</label>
+                            <select id="track">
+                                <option value="">Select Track</option>
+                                <option value="academic">Academic</option>
+                                <option value="tvl">Technical-Vocational-Livelihood</option>
+                                <option value="sports">Sports</option>
+                                <option value="arts_design">Arts & Design</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Strand</label>
+                            <select id="strand">
+                                <option value="">Select Strand</option>
+                                <option value="stem">STEM</option>
+                                <option value="abm">ABM</option>
+                                <option value="humss">HUMSS</option>
+                                <option value="gas">GAS</option>
+                                <option value="ict">ICT</option>
+                                <option value="he">HE</option>
+                                <option value="sports">Sports Strand</option>
+                                <option value="arts-and-design">Arts and Design Strand</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-border"></div>
+                <div class="form-section">
+                    <div class="section-subtitle">Preferred Distance Learning Modalities</div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="modular_print"> Modular (Print)</label>
+                        <label><input type="checkbox" id="modular_digital"> Modular (Digital)</label>
+                        <label><input type="checkbox" id="online"> Online</label>
+                        <label><input type="checkbox" id="radio_based"> Radio-Based Instruction</label>
+                        <label><input type="checkbox" id="educational_tv"> Educational Television</label>
+                        <label><input type="checkbox" id="blended"> Blended</label>
+                        <label><input type="checkbox" id="homeschooling"> Homeschooling</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">Certification</div>
+            <div class="certification-text">
+                I hereby certify that the above information given are true and correct to the best of my knowledge and I allow the Department of Education to use my child's details to create and/or update his/her learner profile in the Learner Information System. The information herein shall be treated as confidential in compliance with the Data Privacy Act of 2012.
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Signature Over Printed Name of Parent/Guardian</label>
+                    <input type="file" id="signature" placeholder="Signature">
+                </div>
+                <div class="input-group">
+                    <label>Date</label>
+                    <input type="text" id="date" placeholder="mm/dd/yyyy">
+                </div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="button" id="submit_button">Submit Enrollment</button>
+        </div>
+    </div>
+
+    <script src="./scripts/enrollment.js"></script>
+</body>
+</html>
