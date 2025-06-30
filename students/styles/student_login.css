@@ -212,6 +212,30 @@ body {
     width: 100%;
 }
 
+#my_button_cancel {
+    margin-top: 10px;
+    width: 100%;
+    background: red;
+    color: white;
+    border: none;
+    padding: 15px 0;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+}
+
+#my_button_cancel:hover {
+    background: rgb(192, 0, 0);
+    transform: translateY(-1px);
+}
+
+#my_button_cancel:active {
+    transform: translateY(0);
+}
+
 #my_button {
     width: 100%;
     background: #007bff;

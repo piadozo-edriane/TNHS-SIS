@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="./styles/stduent_login.css">
+        <link rel="stylesheet" href="./styles/student_login.css">
         <title>Student Login Page</title>
     </head>
     <body>
-        <img id="background_cover" src="./assets/background-cover.jpg" alt="Background Image">
         <div class=form-container>
             <div class="logo-container">
                 <img id="logo_container" src="../assets/tnhs-logo.png">
@@ -23,7 +22,7 @@
             
             <div class="student-input-container">
                 <div class="lrn-container">
-                    <input type="text" id="lrn_input" placeholder="Student LRN">
+                    <input type="number" id="lrn_input" placeholder="Student LRN">
                 </div>
 
                 <div class="birthday-input-container">
@@ -53,6 +52,12 @@
 
             <div class="button-container">
                 <button type="button" id="my_button">Submit</button>
+            </div>
+
+            <div class="button-container">
+                <a href="/index.html">
+                    <button id="my_button_cancel">Cancel</button>
+                </a>
             </div>
 
         </div>
