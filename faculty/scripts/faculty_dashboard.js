@@ -2,6 +2,7 @@ const API_URL = '../api/faculty_dashboard.php';
 
 document.addEventListener('DOMContentLoaded', function() {
     loadTeacherInfo();
+    updateClassesCount();
 });
 
 function loadTeacherInfo() {
@@ -33,26 +34,19 @@ function loadTeacherInfo() {
     });
 }
 
-function logout() {
-    if (confirm('Are you sure you want to logout?')) {
-        fetch('teacher_functions.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=logout'
-        })
+function updateClassesCount() {
+    fetch('../api/view_classes.php')
         .then(response => response.json())
         .then(data => {
-            if (data.success) {
-                window.location.href = 'login.html';
-            } else {
-                alert('Error logging out. Please try again.');
+            if (data.success && Array.isArray(data.classes)) {
+                const count = data.classes.length;
+                const countElem = document.getElementById('classesCount');
+                if (countElem) countElem.textContent = count;
             }
         })
         .catch(error => {
-            console.error('Logout error:', error);
-            alert('Error logging out. Please try again.');
+            const countElem = document.getElementById('classesCount');
+            if (countElem) countElem.textContent = 'Error';
+            console.error('Error fetching class count:', error);
         });
-    }
 }

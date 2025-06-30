@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #e5e5e5;
+}
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 10px 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.dashboard-logo {
+    width: 50px;
+    height: 50px;
+}
+.dashboard-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #7b7bc0;
+    letter-spacing: 1px;
+}
+.dashboard-nav {
+    display: flex;
+    gap: 30px;
+}
+.dashboard-nav a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+}
+.dashboard-nav a.active, .dashboard-nav a:hover {
+    background: #7b7bc0;
+    color: #fff;
+}
+.dashboard-main {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: #f7f7f7;
+    border-radius: 10px;
+    padding: 30px 40px 40px 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.dashboard-main h2 {
+    color: #7b7bc0;
+    font-size: 2rem;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+.classes-container {
+    margin-top: 28px;
+}
+.loading, .no-classes, .error {
+    text-align: center;
+    color: #888;
+    font-size: 1.15rem;
+    margin: 36px 0;
+}
+.classes-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 18px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.classes-table th, .classes-table td {
+    border-bottom: 1px solid #e3e6ed;
+    padding: 16px 12px;
+    text-align: left;
+    font-size: 1.05rem;
+}
+.classes-table th {
+    background: #7b7bc0;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.classes-table tr:last-child td {
+    border-bottom: none;
+}
+.classes-table tr:nth-child(even) {
+    background: #f7f9fc;
+}
+@media (max-width: 700px) {
+    .dashboard-main {
+        padding: 18px 4vw 18px 4vw;
+    }
+    .classes-table th, .classes-table td {
+        padding: 10px 4px;
+        font-size: 0.98rem;
+    }
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 14px 10px;
+    }
+    .dashboard-logo {
+        width: 38px;
+        height: 38px;
+    }
+    .dashboard-title {
+        font-size: 1.2rem;
+    }
+}
