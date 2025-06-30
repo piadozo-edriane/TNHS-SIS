@@ -2,9 +2,9 @@
     session_start();
 
     $host = 'localhost';
-    $dbname = 'final-tnhs-sis'; 
+    $dbname = 'tnhs-sis'; 
     $username = 'root';
-    $password = '';
+    $password_db = ''; 
 
     header('Content-Type: application/json');
 
@@ -14,19 +14,17 @@
     }
 
     $teacher_id = $_POST['teacher_id'] ?? '';
-    $birthday = $_POST['birthday'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    if (empty($teacher_id) || empty($birthday) || empty($password)) {
+    if (empty($teacher_id) || empty($password)) {
         echo json_encode(['success' => false, 'message' => 'All fields are required']);
         exit;
     }
 
-    $valid_birthday = '2005-01-01'; 
     $valid_password = 'teacher123';  
 
-    if ($birthday !== $valid_birthday || $password !== $valid_password) {
-        echo json_encode(['success' => false, 'message' => 'Invalid birthday or password']);
+    if ($password !== $valid_password) {
+        echo json_encode(['success' => false, 'message' => 'Invalid password']);
         exit;
     }
 

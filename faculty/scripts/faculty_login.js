@@ -5,27 +5,20 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!loginBtn) return;
     loginBtn.addEventListener('click', function() {
         const teacherId = document.getElementById('teacher_id')?.value;
-        const month = document.getElementById('month_input')?.value;
-        const day = document.getElementById('day_input')?.value;
-        const year = document.getElementById('year_input')?.value;
         const password = document.getElementById('password')?.value;
         const errorDiv = document.getElementById('error-message');
 
         errorDiv.style.display = 'none';
         errorDiv.textContent = '';
 
-        if (!teacherId || !month || !day || !year || !password) {
+        if (!teacherId || !password) {
             errorDiv.textContent = 'Please fill in all fields';
             errorDiv.style.display = 'block';
             return;
         }
 
-        const paddedMonth = month.padStart(2, '0');
-        const paddedDay = day.padStart(2, '0');
-        const birthday = `${year}-${paddedMonth}-${paddedDay}`;
         const formData = new FormData();
         formData.append('teacher_id', teacherId);
-        formData.append('birthday', birthday);
         formData.append('password', password);
 
         fetch(API_URL, {
