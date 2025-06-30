@@ -33,7 +33,7 @@
                 <h4>Profile Information</h4>
                 <p><b>Name:</b> <span id="profile-name">Loading...</span></p>
                 <p><b>LRN:</b> <span id="profile-lrn">Loading...</span></p>
-                <p><b>Grade & Section:</b> 10 - Diamond</p>
+                <p><b>Grade & Section:</b> <span class="grade-section">Loading...</span></p>
                 <button onclick="window.location.href='profile.html'">View Full Profile</button>
             </div>
             <div class="dashboard-card grade-summary">
@@ -91,6 +91,15 @@
                 studentNameElement.textContent = `${fullName} (${student.lrn})`;
                 profileNameElement.textContent = fullName;
                 profileLrnElement.textContent = student.lrn;
+
+                fetch(`../api/get_student_profile.php?lrn=${encodeURIComponent(student.lrn)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const gradeSection = (data.grade_level && data.class_name) ? `${data.grade_level} - ${data.class_name}` : 'Not available';
+                            document.querySelectorAll('.grade-section').forEach(el => el.textContent = gradeSection);
+                        }
+                    });
             }
 
             fetch('../api/get_class_schedule.php')

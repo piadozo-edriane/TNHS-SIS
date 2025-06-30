@@ -4,7 +4,6 @@
 }
 
 body {
-    background-image: url(../assets/tnhs-1.png);
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
@@ -91,4 +90,10 @@ body {
 
 .pick-faculty:hover {
     background-color: #30612c;
+}
+
+.main-content, table, #app {
+    background: #fff;
+    position: relative;
+    z-index: 2;
 }

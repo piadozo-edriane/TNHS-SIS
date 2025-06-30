@@ -12,18 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
         errorDiv.textContent = '';
 
         if (!teacherId || !password) {
-            errorDiv.textContent = 'Please fill in all fields';
+            errorDiv.textContent = 'Teacher ID and password are required.';
             errorDiv.style.display = 'block';
             return;
         }
 
-        const formData = new FormData();
-        formData.append('teacher_id', teacherId);
-        formData.append('password', password);
-
         fetch(API_URL, {
             method: 'POST',
-            body: formData
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ teacher_id: teacherId, password: password })
         })
         .then(response => response.json())
         .then(data => {

@@ -15,14 +15,16 @@ try {
     exit;
 }
 
+$class_id = 7;
+
 $stmt = $pdo->prepare("
-    SELECT s.subject_name, cs.day, cs.time, cs.minutes, cs.room
+    SELECT s.subject_name, cs.day, cs.time, cs.minutes, cs.room_number
     FROM class_schedule cs
     JOIN subject s ON cs.subject_id = s.subject_id
-    WHERE s.grade_level = 10 AND s.academic_year = 2025
+    WHERE cs.class_id = :class_id AND s.grade_level = 10 AND s.academic_year = 2025
     ORDER BY cs.time
 ");
-$stmt->execute();
+$stmt->execute(['class_id' => $class_id]);
 $schedule = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode(['success' => true, 'schedule' => $schedule]);

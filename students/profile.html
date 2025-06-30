@@ -19,7 +19,6 @@
             <a href="schedule.html">Schedule</a>
         </nav>
         <div class="dashboard-avatar">
-            <img src="../assets/tnhs-1.png" alt="User Avatar">
             <button onclick="logoutStudent()" class="logout-btn">Logout</button>
         </div>
     </header>
@@ -37,7 +36,7 @@
                 </tr>
                 <tr>
                     <th>Grade & Section</th>
-                    <td>10 - Diamond</td>
+                    <td id="grade-section" class="grade-section">Loading...</td>
                 </tr>
                 <tr>
                     <th>Birthday</th>
@@ -67,6 +66,7 @@
                 const profileLrnElement = document.getElementById('profile-lrn');
                 const profileBirthdayElement = document.getElementById('profile-birthday');
                 const profileAddressElement = document.getElementById('profile-address');
+                const gradeSectionElement = document.getElementById('grade-section');
                 
                 const fullName = `${student.last_name}, ${student.first_name} ${student.middle_name || ''} ${student.extension_name || ''}`.trim();
                 
@@ -74,6 +74,7 @@
                 profileLrnElement.textContent = student.lrn;
                 profileBirthdayElement.textContent = 'Loading...';
                 profileAddressElement.textContent = 'Loading...';
+                gradeSectionElement.textContent = 'Loading...';
 
                 // Fetch birthday and address from API
                 fetch(`../api/get_student_profile.php?lrn=${encodeURIComponent(student.lrn)}`)
@@ -82,14 +83,18 @@
                         if (data.success) {
                             profileBirthdayElement.textContent = data.birth_date || 'Not available';
                             profileAddressElement.textContent = data.address || 'Not available';
+                            const gradeSection = (data.grade_level && data.class_name) ? `${data.grade_level} - ${data.class_name}` : 'Not available';
+                            gradeSectionElement.textContent = gradeSection;
                         } else {
                             profileBirthdayElement.textContent = 'Not available';
                             profileAddressElement.textContent = 'Not available';
+                            gradeSectionElement.textContent = 'Not available';
                         }
                     })
                     .catch(() => {
                         profileBirthdayElement.textContent = 'Error';
                         profileAddressElement.textContent = 'Error';
+                        gradeSectionElement.textContent = 'Error';
                     });
             }
         });
