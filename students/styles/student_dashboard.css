@@ -43,19 +43,6 @@ body {
     background: #7b7bc0;
     color: #fff;
 }
-.dashboard-avatar img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ccc;
-}
-
-.dashboard-avatar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 
 .logout-btn {
     background: #dc3545;
