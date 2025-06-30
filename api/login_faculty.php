@@ -2,13 +2,18 @@
     session_start();
 
     $host = 'localhost';
-    $dbname = 'tnhs-sis'; 
+    $dbname = 'final-tnhs-sis'; 
     $username = 'root';
     $password_db = ''; 
 
     header('Content-Type: application/json');
 
+    function debug_log($msg) {
+        file_put_contents(__DIR__ . '/debug_login.log', date('Y-m-d H:i:s') . ' ' . $msg . "\n", FILE_APPEND);
+    }
+
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        debug_log('Invalid request method: ' . $_SERVER['REQUEST_METHOD']);
         echo json_encode(['success' => false, 'message' => 'Invalid request method']);
         exit;
     }
@@ -16,7 +21,10 @@
     $teacher_id = $_POST['teacher_id'] ?? '';
     $password = $_POST['password'] ?? '';
 
+    debug_log('Login attempt: teacher_id=' . $teacher_id);
+
     if (empty($teacher_id) || empty($password)) {
+        debug_log('Missing fields: teacher_id or password');
         echo json_encode(['success' => false, 'message' => 'All fields are required']);
         exit;
     }
@@ -24,15 +32,14 @@
     $valid_password = 'teacher123';  
 
     if ($password !== $valid_password) {
+        debug_log('Invalid password for teacher_id=' . $teacher_id);
         echo json_encode(['success' => false, 'message' => 'Invalid password']);
         exit;
     }
 
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password_db);
-        
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
         $stmt = $pdo->prepare("SELECT teacher_id, first_name, middle_name, extension_name FROM teacher WHERE teacher_id = ?");
@@ -40,6 +47,7 @@
         $teacher = $stmt->fetch();
 
         if (!$teacher) {
+            debug_log('Teacher ID not found: ' . $teacher_id);
             echo json_encode(['success' => false, 'message' => 'Teacher ID not found']);
             exit;
         }
@@ -51,6 +59,8 @@
         $_SESSION['extension_name'] = $teacher['extension_name'];
         $_SESSION['login_time'] = time();
 
+        debug_log('Login successful: teacher_id=' . $teacher['teacher_id'] . ', session_id=' . session_id());
+
         echo json_encode([
             'success' => true, 
             'message' => 'Login successful',
@@ -59,6 +69,7 @@
         ]);
 
     } catch (PDOException $e) {
+        debug_log('Database error: ' . $e->getMessage());
         error_log("Database error: " . $e->getMessage());
         echo json_encode(['success' => false, 'message' => 'Database connection error']);
     }
