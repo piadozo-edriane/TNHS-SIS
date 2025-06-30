@@ -87,7 +87,7 @@ body {
     margin-bottom: 15px;
 }
 
-#my_text {
+#teacher_id {
     width: 100%;
     border: 2px solid #dee2e6;
     background-color: #f8f9fa;
@@ -99,27 +99,23 @@ body {
     box-sizing: border-box;
 }
 
-#my_text:focus {
+#teacher_id:focus {
     outline: none;
     border-color: #80bdff;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
     background-color: #fff;
 }
 
-#my_text::placeholder {
+#teacher::placeholder {
     color: #6c757d;
     font-weight: 400;
 }
 
-.month-input-container,
-.day-input-container,
-.year-input-container {
+.month-input-container, .day-input-container, .year-input-container {
     flex: 1;
 }
 
-#month_input_container,
-#day_input_container,
-#year_input_container {
+#month_input, #day_input, #year_input {
     width: 100%;
     border: 2px solid #dee2e6;
     background-color: #f8f9fa;
@@ -138,18 +134,14 @@ body {
     padding-right: 40px;
 }
 
-#month_input_container:focus,
-#day_input_container:focus,
-#year_input_container:focus {
+#month_input_:focus, #day_input:focus, #year_input:focus {
     outline: none;
     border-color: #80bdff;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
     background-color: #fff;
 }
 
-#month_input_container option,
-#day_input_container option,
-#year_input_container option {
+#month_input option, #day_input option, #year_input option {
     color: #495057;
     background-color: #fff;
 }
@@ -159,7 +151,7 @@ body {
     width: 100%;
 }
 
-#my_password {
+#password {
     width: 100%;
     border: 2px solid #dee2e6;
     background-color: #f8f9fa;
@@ -171,14 +163,14 @@ body {
     box-sizing: border-box;
 }
 
-#my_password:focus {
+#password:focus {
     outline: none;
     border-color: #80bdff;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
     background-color: #fff;
 }
 
-#my_password::placeholder {
+#password::placeholder {
     color: #6c757d;
     font-weight: 400;
 }
@@ -207,7 +199,7 @@ body {
     width: 100%;
 }
 
-#my_button {
+#login_button {
     width: 100%;
     background: #007bff;
     color: white;
@@ -221,16 +213,46 @@ body {
     letter-spacing: 0.5px;
 }
 
-#my_button:hover {
+#login_button:hover {
     background: #0056b3;
     transform: translateY(-1px);
 }
 
-#my_button:active {
+#login_button:active {
     transform: translateY(0);
 }
 
-/* Mobile responsiveness */
+.success-modal {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 320px;
+    background: transparent;
+    display: block;
+    z-index: 1000;
+}
+.success-modal-content {
+    background: #fff;
+    padding: 20px 24px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.success-modal-content h3 {
+    margin: 0 0 8px 0;
+}
+.success-modal-content p {
+    margin: 0 0 12px 0;
+}
+.success-modal-content button {
+    padding: 6px 18px;
+    border-radius: 4px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     .form-container {
         width: 95vw;

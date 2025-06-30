@@ -5,7 +5,7 @@
         <title>Faculty Login Page</title>
     </head>
     <body>
-        <div class=form-container>
+        <div class="form-container">
             <div class="logo-container">
                 <img id="logo_container" src="../assets/tnhs-logo.png">
             </div>
@@ -20,60 +20,91 @@
             
             <div class="faculty-input-container">
                 <div class="username-container">
-                    <input type="text" id="my_text" placeholder="Teacher ID">
+                    <input type="text" id="teacher_id" placeholder="Teacher ID">
                 </div>
 
                 <div class="birthday-container">
                     <div class="month-input-container">
-                        <select id="month_input_container" placeholder="Birthday">
-                            <option value="">
-                                <label for="#">Month</label>
-                                <option value="january">Januray</option>
-                                <option value="february">February</option>
-                                <option value="march">March</option>
-                                <option value="january">Januray</option>
-                            </option>
+                        <select id="month_input" placeholder="Birthday">
+                            <option value="">Month</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
                         </select>
                     </div>
                     
                     <div class="day-input-container">
-                        <select id="day_input_container" placeholder="Birthday">
-                            <option value="wew">
-                                <label for="">Day</label>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </option>
+                        <select id="day_input" placeholder="Birthday">
+                            <option value="">Day</option>
+                            <option value="01">1</option>
+                            <option value="02">2</option>
+                            <option value="03">3</option>
+                            <option value="04">4</option>
+                            <option value="05">5</option>
+                            <option value="06">6</option>
+                            <option value="07">7</option>
+                            <option value="08">8</option>
+                            <option value="09">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
                         </select>
                      </div>
 
                      <div class="year-input-container"> 
-                        <select id="year_input_container" placeholder="Birthday">
-                            <option value="">
-                                <label value="#">Year</label>
-                                <option value="2005">2005</option>
-                                <option value="2004">2004</option>
-                                <option value="2003">2003</option>
-                                <option value="2002">2002</option>
-                            </option>
+                        <select id="year_input" placeholder="Birthday">
+                            <option value="">Year</option>
+                            <option value="2002">2002</option>
+                            <option value="2003">2003</option>
+                            <option value="2004">2004</option>
+                            <option value="2005">2005</option>
                         </select>
                     </div>
                 </div>
             </div>
 
             <div class="password">
-                    <input type="text" id="my_password" placeholder="Password">
+                    <input type="password" id="password" placeholder="Password">
             </div>
+
+            <div id="error-message" style="display:none;color:red;margin:10px 0;"></div>
 
             <div class="forgot-password-div">
                 <p href="./forgotpass.html" class="forgot-pass-label">Forgot password?</p>
             </div>
 
             <div class="button-container">
-                <button type="button" id="my_button">Submit</button>
+                <button type="button" id="login_button">Submit</button>
             </div>
-
         </div>
+        <script src="./scripts/faculty_login.js"></script>
     </body>
 </html>
