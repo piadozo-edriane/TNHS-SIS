@@ -1,4 +1,97 @@
+const API_URL = '../api/enrollment.php';
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Sample data for municipalities and barangays (in production, fetch from server)
+    const locationData = {
+        'Cebu': {
+            municipalities: ['Cebu City', 'Mandaue City'],
+            barangays: {
+                'Cebu City': ['Lahug', 'Mabolo'],
+                'Mandaue City': ['Banilad']
+            }
+        },
+        'Davao del Sur': {
+            municipalities: ['Davao City'],
+            barangays: {
+                'Davao City': ['Buhangin']
+            }
+        },
+        'Laguna': {
+            municipalities: ['Santa Rosa'],
+            barangays: {
+                'Santa Rosa': ['Balibago']
+            }
+        }
+    };
+
+    // Function to populate dropdown
+    function populateDropdown(selectElement, options, defaultOption) {
+        selectElement.innerHTML = `<option value="">${defaultOption}</option>`;
+        options.forEach(option => {
+            const opt = document.createElement('option');
+            opt.value = option;
+            opt.textContent = option;
+            selectElement.appendChild(opt);
+        });
+    }
+
+    // Current address dropdowns
+    const currentProvince = document.getElementById('current_province');
+    const currentMunicipality = document.getElementById('current_municipality');
+    const currentBarangay = document.getElementById('current_barangay');
+
+    // Permanent address dropdowns
+    const permanentProvince = document.getElementById('permanent_province');
+    const permanentMunicipality = document.getElementById('permanent_municipality');
+    const permanentBarangay = document.getElementById('permanent_barangay');
+
+    // Update municipalities based on province selection
+    function updateMunicipalities(province, municipalitySelect) {
+        if (province && locationData[province]) {
+            populateDropdown(municipalitySelect, locationData[province].municipalities, 'Select Municipality/City');
+            municipalitySelect.disabled = false;
+        } else {
+            municipalitySelect.innerHTML = '<option value="">Select Municipality/City</option>';
+            municipalitySelect.disabled = true;
+        }
+    }
+
+    // Update barangays based on municipality selection
+    function updateBarangays(province, municipality, barangaySelect) {
+        if (province && municipality && locationData[province] && locationData[province].barangays[municipality]) {
+            populateDropdown(barangaySelect, locationData[province].barangays[municipality], 'Select Barangay');
+            barangaySelect.disabled = false;
+        } else {
+            barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+            barangaySelect.disabled = true;
+        }
+    }
+
+    // Current address province change
+    currentProvince.addEventListener('change', function() {
+        const province = this.value;
+        updateMunicipalities(province, currentMunicipality);
+        updateBarangays(province, currentMunicipality.value, currentBarangay);
+    });
+
+    // Current address municipality change
+    currentMunicipality.addEventListener('change', function() {
+        updateBarangays(currentProvince.value, this.value, currentBarangay);
+    });
+
+    // Permanent address province change
+    permanentProvince.addEventListener('change', function() {
+        const province = this.value;
+        updateMunicipalities(province, permanentMunicipality);
+        updateBarangays(province, permanentMunicipality.value, permanentBarangay);
+    });
+
+    // Permanent address municipality change
+    permanentMunicipality.addEventListener('change', function() {
+        updateBarangays(permanentProvince.value, this.value, permanentBarangay);
+    });
+
+    // Conditional field display logic
     document.querySelectorAll('input[name="ip_community"]').forEach(radio => {
         radio.addEventListener('change', function() {
             document.getElementById('ip_specify_container').style.display = this.value === 'yes' ? 'block' : 'none';
@@ -23,161 +116,64 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Form submission
-    document.getElementById('submit_button').addEventListener('click', function() {
-        const formData = {
-            school_year: document.getElementById('school_year').value,
-            grade_level: document.getElementById('grade_level').value,
-            lrn_status: document.querySelector('input[name="lrn_status"]:checked')?.value,
-            returning_status: document.querySelector('input[name="returning_status"]:checked')?.value,
-            psa_birth_cert: document.getElementById('psa_birth_cert').value,
-            lrn: document.getElementById('lrn').value,
-            last_name: document.getElementById('last_name').value,
-            first_name: document.getElementById('first_name').value,
-            middle_name: document.getElementById('middle_name').value,
-            extension_name: document.getElementById('extension_name').value,
-            birthdate: document.getElementById('birthdate').value,
-            sex: document.getElementById('sex').value,
-            age: document.getElementById('age').value,
-            place_of_birth: document.getElementById('place_of_birth').value,
-            mother_tongue: document.getElementById('mother_tongue').value,
-            ip_community: document.querySelector('input[name="ip_community"]:checked')?.value,
-            ip_specify: document.getElementById('ip_specify')?.value || '',
-            four_ps: document.querySelector('input[name="four_ps"]:checked')?.value,
-            four_ps_id: document.getElementById('four_ps_id')?.value || '',
-            disability: document.querySelector('input[name="disability"]:checked')?.value,
-            disability_types: Array.from(document.querySelectorAll('input[name="disability_type"]:checked')).map(cb => cb.value),
-            current_address: {
-                house_no: document.getElementById('current_house_no').value,
-                sitio_street: document.getElementById('current_sitio_street').value,
-                barangay: document.getElementById('current_barangay').value,
-                municipality: document.getElementById('current_municipality').value,
-                province: document.getElementById('current_province').value,
-                zip_code: document.getElementById('current_zip_code').value
-            },
-            same_address: document.querySelector('input[name="same_address"]:checked')?.value,
-            permanent_address: {
-                house_no: document.getElementById('permanent_house_no')?.value || '',
-                sitio_street: document.getElementById('permanent_sitio_street')?.value || '',
-                barangay: document.getElementById('permanent_barangay')?.value || '',
-                municipality: document.getElementById('permanent_municipality')?.value || '',
-                province: document.getElementById('permanent_province')?.value || '',
-                zip_code: document.getElementById('permanent_zip_code')?.value || ''
-            },
-            father: {
-                last_name: document.getElementById('father_last_name').value,
-                first_name: document.getElementById('father_first_name').value,
-                middle_name: document.getElementById('father_middle_name').value,
-                contact: document.getElementById('father_contact').value
-            },
-            mother: {
-                last_name: document.getElementById('mother_last_name').value,
-                first_name: document.getElementById('mother_first_name').value,
-                middle_name: document.getElementById('mother_middle_name').value,
-                contact: document.getElementById('mother_contact').value
-            },
-            guardian: {
-                last_name: document.getElementById('guardian_last_name').value,
-                first_name: document.getElementById('guardian_first_name').value,
-                middle_name: document.getElementById('guardian_middle_name').value,
-                contact: document.getElementById('guardian_contact').value
-            },
-            last_grade_level: document.getElementById('last_grade_level').value,
-            last_school_attended: document.getElementById('last_school_attended').value,
-            last_school_year: document.getElementById('last_school_year').value,
-            school_id: document.getElementById('school_id').value,
-            semester: document.querySelector('input[name="semester"]:checked')?.value,
-            track: document.getElementById('track').value,
-            strand: document.getElementById('strand').value,
-            modalities: {
-                modular_print: document.getElementById('modular_print').checked,
-                modular_digital: document.getElementById('modular_digital').checked,
-                online: document.getElementById('online').checked,
-                radio_based: document.getElementById('radio_based').checked,
-                blended: document.getElementById('blended').checked,
-                educational_tv: document.getElementById('educational_tv').checked,
-                homeschooling: document.getElementById('homeschooling').checked
-            },
-            signature: document.getElementById('signature').files[0],
-            date: document.getElementById('date').value
-        };
+    document.querySelectorAll('input[name="returning_transfer_status"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('returning_transfer_container').style.display = this.value === 'yes' ? 'block' : 'none';
+        });
+    });
 
-        // Validation
-        if (!formData.school_year || !formData.grade_level) {
-            alert('Please fill in School Year and Grade Level.');
-            return;
-        }
+    document.querySelectorAll('input[name="senior_high_status"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('senior_high_container').style.display = this.value === 'yes' ? 'block' : 'none';
+        });
+    });
 
-        if (!formData.lrn_status || !formData.returning_status) {
-            alert('Please select LRN and Returning status.');
-            return;
-        }
+    // Form submission with AJAX
+    document.getElementById('enrollment_form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const errorMessages = document.getElementById('error-messages');
 
-        if (!formData.last_name || !formData.first_name || !formData.birthdate || !formData.sex || !formData.age) {
-            alert('Please complete required learner information (Last Name, First Name, Birthdate, Sex, Age).');
-            return;
-        }
+        fetch(API_URL, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            errorMessages.style.display = 'none';
+            errorMessages.innerHTML = '';
 
-        if (!formData.birthdate.match(/^\d{4}-\d{2}-\d{2}$/)) {
-            alert('Please select a valid birthdate.');
-            return;
-        }
-
-        if (formData.ip_community === 'yes' && !formData.ip_specify) {
-            alert('Please specify the Indigenous Community.');
-            return;
-        }
-
-        if (formData.four_ps === 'yes' && !formData.four_ps_id) {
-            alert('Please provide the 4Ps Household ID Number.');
-            return;
-        }
-
-        if (formData.disability === 'yes' && formData.disability_types.length === 0) {
-            alert('Please select at least one disability type.');
-            return;
-        }
-
-        if (!formData.current_address.house_no || !formData.current_address.barangay || !formData.current_address.municipality) {
-            alert('Please complete required current address fields (House No., Barangay, Municipality/City).');
-            return;
-        }
-
-        if (formData.same_address === 'no' && (!formData.permanent_address.house_no || !formData.permanent_address.barangay || !formData.permanent_address.municipality)) {
-            alert('Please complete required permanent address fields (House No., Barangay, Municipality/City).');
-            return;
-        }
-
-        if (formData.returning_status === 'yes' && (!formData.last_grade_level || !formData.last_school_attended || !formData.last_school_year || !formData.school_id)) {
-            alert('Please complete all fields for Returning Learner/Transfer.');
-            return;
-        }
-
-        if (formData.semester && (!formData.track || !formData.strand)) {
-            alert('Please complete all Senior High School fields or leave them all blank.');
-            return;
-        }
-
-        if (!Object.values(formData.modalities).some(v => v)) {
-            alert('Please select at least one distance learning modality.');
-            return;
-        }
-
-        if (!formData.signature) {
-            alert('Please upload a signature file.');
-            return;
-        }
-
-        if (!formData.date.match(/^\d{4}-\d{2}-\d{2}$/)) {
-            alert('Please select a valid certification date.');
-            return;
-        }
-
-        console.log('Form Data:', formData);
-        alert('Enrollment form submitted successfully!');
-        document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]), select').forEach(input => input.value = '');
-        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => input.checked = false);
-        document.getElementById('signature').value = '';
-        document.querySelectorAll('.conditional').forEach(container => container.style.display = 'none');
+            if (data.errors && data.errors.length > 0) {
+                errorMessages.style.display = 'block';
+                const ul = document.createElement('ul');
+                data.errors.forEach(error => {
+                    const li = document.createElement('li');
+                    li.textContent = error;
+                    ul.appendChild(li);
+                });
+                errorMessages.appendChild(ul);
+            } else if (data.success) {
+                alert(data.success);
+                document.getElementById('enrollment_form').reset();
+                document.querySelectorAll('.conditional').forEach(container => container.style.display = 'none');
+                // Reset dropdowns
+                currentMunicipality.innerHTML = '<option value="">Select Municipality/City</option>';
+                currentBarangay.innerHTML = '<option value="">Select Barangay</option>';
+                permanentMunicipality.innerHTML = '<option value="">Select Municipality/City</option>';
+                permanentBarangay.innerHTML = '<option value="">Select Barangay</option>';
+                currentMunicipality.disabled = true;
+                currentBarangay.disabled = true;
+                permanentMunicipality.disabled = true;
+                permanentBarangay.disabled = true;
+            } else {
+                errorMessages.style.display = 'block';
+                errorMessages.textContent = data.error || 'An unexpected error occurred.';
+            }
+        })
+        .catch(error => {
+            errorMessages.style.display = 'block';
+            errorMessages.textContent = 'Failed to submit form. Please try again.';
+            console.error('Error:', error);
+        });
     });
 });
