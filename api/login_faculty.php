@@ -2,34 +2,29 @@
     session_start();
 
     $host = 'localhost';
-    $dbname = 'tnhs-sis'; 
+    $dbname = 'final-tnhs-sis'; 
     $username = 'root';
-    $password_db = ''; 
+    $password = ''; 
 
     header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         echo json_encode(['success' => false, 'message' => 'Invalid request method']);
         exit;
     }
 
-    $teacher_id = $_POST['teacher_id'] ?? '';
-    $password = $_POST['password'] ?? '';
+    $data = json_decode(file_get_contents('php://input'), true);
+    $teacher_id = $data['teacher_id'] ?? null;
+    $teacher_password = $data['password'] ?? null;
 
-    if (empty($teacher_id) || empty($password)) {
-        echo json_encode(['success' => false, 'message' => 'All fields are required']);
-        exit;
-    }
-
-    $valid_password = 'teacher123';  
-
-    if ($password !== $valid_password) {
-        echo json_encode(['success' => false, 'message' => 'Invalid password']);
+    if (!$teacher_id || !$teacher_password) {
+        echo json_encode(['success' => false, 'message' => 'Teacher ID and password are required.']);
         exit;
     }
 
     try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password_db);
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
@@ -44,19 +39,23 @@
             exit;
         }
 
-        $_SESSION['logged_in'] = true;
-        $_SESSION['teacher_id'] = $teacher['teacher_id'];
-        $_SESSION['first_name'] = $teacher['first_name'];
-        $_SESSION['middle_name'] = $teacher['middle_name'];
-        $_SESSION['extension_name'] = $teacher['extension_name'];
-        $_SESSION['login_time'] = time();
+        if ($teacher_password === 'password') {
+            $_SESSION['logged_in'] = true;
+            $_SESSION['teacher_id'] = $teacher['teacher_id'];
+            $_SESSION['first_name'] = $teacher['first_name'];
+            $_SESSION['middle_name'] = $teacher['middle_name'];
+            $_SESSION['extension_name'] = $teacher['extension_name'];
+            $_SESSION['login_time'] = time();
 
-        echo json_encode([
-            'success' => true, 
-            'message' => 'Login successful',
-            'teacher_id' => $teacher['teacher_id'],
-            'name' => trim($teacher['first_name'] . ' ' . $teacher['middle_name'] . ' ' . $teacher['extension_name'])
-        ]);
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Login successful',
+                'teacher_id' => $teacher['teacher_id'],
+                'name' => trim($teacher['first_name'] . ' ' . $teacher['middle_name'] . ' ' . $teacher['extension_name'])
+            ]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Invalid credentials.']);
+        }
 
     } catch (PDOException $e) {
         error_log("Database error: " . $e->getMessage());
