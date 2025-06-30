@@ -15,10 +15,6 @@ body {
 }
 
 .form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     position: absolute;
     border: none;
     border-radius: 8px;
@@ -48,6 +44,7 @@ body {
 }
 
 .header {
+    margin-top: 10px;
     margin-bottom: 15px;
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -65,23 +62,20 @@ body {
     text-align: center;
 }
 
-.session-label {
+.header-3 h6 {
     font-size: 30px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-weight: 600;
     color: #666;
+    margin: 0;
 }
 
-.student-input-container {
-    width: 100%;
-}
-
-.lrn-container {
-    width: 100%;
+.administrator-input-container {
     margin-bottom: 15px;
+    width: 100%;
 }
 
-.birthday-input-container {
+.username-container {
     width: 100%;
     margin-bottom: 15px;
 }
@@ -90,9 +84,10 @@ body {
     display: flex;
     gap: 8px;
     width: 100%;
+    margin-bottom: 15px;
 }
 
-#lrn_input {
+#administrator_id {
     width: 100%;
     border: 2px solid #dee2e6;
     background-color: #f8f9fa;
@@ -104,27 +99,23 @@ body {
     box-sizing: border-box;
 }
 
-#lrn_input:focus {
+#administrator_id:focus {
     outline: none;
     border-color: #80bdff;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
     background-color: #fff;
 }
 
-#lrn_input::placeholder {
+#administrator::placeholder {
     color: #6c757d;
     font-weight: 400;
 }
 
-.month-input-container,
-.day-input-container,
-.year-input-container {
+.month-input-container, .day-input-container, .year-input-container {
     flex: 1;
 }
 
-#month_input_container,
-#day_input_container,
-#year_input_container {
+#month_input, #day_input, #year_input {
     width: 100%;
     border: 2px solid #dee2e6;
     background-color: #f8f9fa;
@@ -143,18 +134,14 @@ body {
     padding-right: 40px;
 }
 
-#month_input_container:focus,
-#day_input_container:focus,
-#year_input_container:focus {
+#month_input_:focus, #day_input:focus, #year_input:focus {
     outline: none;
     border-color: #80bdff;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
     background-color: #fff;
 }
 
-#month_input_container option,
-#day_input_container option,
-#year_input_container option {
+#month_input option, #day_input option, #year_input option {
     color: #495057;
     background-color: #fff;
 }
@@ -164,7 +151,7 @@ body {
     width: 100%;
 }
 
-#my_password {
+#password {
     width: 100%;
     border: 2px solid #dee2e6;
     background-color: #f8f9fa;
@@ -176,43 +163,23 @@ body {
     box-sizing: border-box;
 }
 
-#my_password:focus {
+#password:focus {
     outline: none;
     border-color: #80bdff;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
     background-color: #fff;
 }
 
-#my_password::placeholder {
+#password::placeholder {
     color: #6c757d;
     font-weight: 400;
-}
-
-.forgot-password-div {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.forgot-pass-label {
-    color: #dc3545;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    margin: 0;
-    transition: color 0.2s ease;
-}
-
-.forgot-pass-label:hover {
-    color: #c82333;
-    text-decoration: underline;
 }
 
 .button-container {
     width: 100%;
 }
 
-#my_button {
+#login_button {
     width: 100%;
     background: #007bff;
     color: white;
@@ -226,16 +193,46 @@ body {
     letter-spacing: 0.5px;
 }
 
-#my_button:hover {
+#login_button:hover {
     background: #0056b3;
     transform: translateY(-1px);
 }
 
-#my_button:active {
+#login_button:active {
     transform: translateY(0);
 }
 
-/* Mobile responsiveness */
+.success-modal {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 320px;
+    background: transparent;
+    display: block;
+    z-index: 1000;
+}
+.success-modal-content {
+    background: #fff;
+    padding: 20px 24px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.success-modal-content h3 {
+    margin: 0 0 8px 0;
+}
+.success-modal-content p {
+    margin: 0 0 12px 0;
+}
+.success-modal-content button {
+    padding: 6px 18px;
+    border-radius: 4px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     .form-container {
         width: 95vw;
@@ -252,7 +249,7 @@ body {
         font-size: 24px;
     }
     
-    .session-label {
+    .header-3 h6 {
         font-size: 14px;
     }
 }

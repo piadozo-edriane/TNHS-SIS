@@ -63,9 +63,9 @@ body {
 }
 
 .header-3 h6 {
-    font-size: 16px;
+    font-size: 30px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-weight: 400;
+    font-weight: 600;
     color: #666;
     margin: 0;
 }
@@ -173,26 +173,6 @@ body {
 #password::placeholder {
     color: #6c757d;
     font-weight: 400;
-}
-
-.forgot-password-div {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.forgot-pass-label {
-    color: #dc3545;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    margin: 0;
-    transition: color 0.2s ease;
-}
-
-.forgot-pass-label:hover {
-    color: #c82333;
-    text-decoration: underline;
 }
 
 .button-container {
