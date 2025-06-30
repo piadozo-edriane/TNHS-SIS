@@ -2,9 +2,9 @@
     session_start();
 
     $host = 'localhost';
-    $dbname = 'tnhs-sis'; 
+    $dbname = 'final-tnhs-sis'; 
     $username = 'root';
-    $password_db = ''; 
+    $password = '';
 
     header('Content-Type: application/json');
 
