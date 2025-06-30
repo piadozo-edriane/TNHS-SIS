@@ -68,6 +68,7 @@ body {
     padding-top: 2%;
     padding-bottom: 2%;
     border: 0;
+    border-radius: 6px;
 }
 
 .pick-faculty {
@@ -80,6 +81,7 @@ body {
     padding-top: 2%;
     padding-bottom: 2%;
     border: 0;
+    border-radius: 6px;
 }
 
 .pick-student:hover {
