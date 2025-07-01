@@ -174,6 +174,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 currentBarangay.disabled = true;
                 permanentMunicipality.disabled = true;
                 permanentBarangay.disabled = true;
+                // Redirect to index.html
+                window.location.href = '../index.html';
             } else {
                 errorMessages.style.display = 'block';
                 errorMessages.textContent = data.error || 'An unexpected error occurred.';
