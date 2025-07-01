@@ -58,24 +58,21 @@ body {
     box-shadow: 0 4px 24px rgba(0,0,0,0.07);
 }
 .faculty-info {
-    margin-bottom: 10px;
     font-size: 1.1rem;
     color: #444;
     border-bottom: 1px solid #ccc;
-    padding-bottom: 8px;
 }
 .dashboard-main h2 {
-    margin-top: 0;
     color: #222;
 }
 .dashboard-main h3 {
     color: #7b7bc0;
-    margin-bottom: 25px;
+    font-size: 30px;
 }
 .dashboard-cards {
     display: flex;
     gap: 30px;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
 }
 .dashboard-card {
@@ -163,6 +160,20 @@ body {
 }
 .quick-actions-buttons button:hover {
     background: #5a5a99;
+}
+.logout-button {
+    background: #dc3545; /* Red color for logout */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: 500;
+}
+.logout-button:hover {
+    background: #c82333;
 }
 @media (max-width: 900px) {
     .dashboard-cards {
