@@ -2,7 +2,7 @@
     session_start();
 
     $host = 'localhost';
-    $dbname = 'final-tnhs-sis'; 
+    $dbname = 'improved-tnhs-sis'; 
     $username = 'root';
     $password = ''; 
 

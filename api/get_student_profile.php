@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
 $host = 'localhost';
-$dbname = 'final-tnhs-sis'; 
+$dbname = 'improved-tnhs-sis'; 
 $username = 'root';
 $password = '';
 
@@ -23,7 +23,7 @@ if (!$lrn) {
     exit;
 }
 
-$stmt = $pdo->prepare('SELECT address, birth_date FROM place_of_birth WHERE lrn = ?');
+$stmt = $pdo->prepare('SELECT birth_date, address FROM student WHERE lrn = ?');
 $stmt->execute([$lrn]);
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -40,6 +40,16 @@ $classStmt = $pdo->prepare('
 ');
 $classStmt->execute([$lrn]);
 $classInfo = $classStmt->fetch(PDO::FETCH_ASSOC);
+
+// Temporary: Output raw JSON response for debugging
+echo json_encode([
+    'success' => true,
+    'address' => $result['address'] ?? null,
+    'birth_date' => $result['birth_date'] ?? null,
+    'class_name' => $classInfo['class_name'] ?? null,
+    'grade_level' => $classInfo['grade_level'] ?? null
+]);
+exit;
 
 if ($result) {
     echo json_encode([
