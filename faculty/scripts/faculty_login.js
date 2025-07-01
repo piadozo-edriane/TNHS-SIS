@@ -55,7 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             modal.style.display = 'block';
         }
+        const timeoutId = setTimeout(function() {
+            window.location.href = 'faculty_dashboard.html';
+        }, 2000);
         document.getElementById('okButton').onclick = function() {
+            clearTimeout(timeoutId); 
             window.location.href = 'faculty_dashboard.html';
         };
     }
