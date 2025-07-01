@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'block';
         }
         document.getElementById('okButton').onclick = function() {
-            window.location.href = 'faculty_dashboard.php';
+            window.location.href = 'faculty_dashboard.html';
         };
     }
 });
