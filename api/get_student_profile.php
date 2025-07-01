@@ -23,41 +23,65 @@ if (!$lrn) {
     exit;
 }
 
-$stmt = $pdo->prepare('SELECT birth_date, address FROM student WHERE lrn = ?');
-$stmt->execute([$lrn]);
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
+// Fetch student information including birthday and address from place_of_birth table
+$studentStmt = $pdo->prepare('
+    SELECT s.student_id, s.first_name, s.middle_name, s.last_name, s.extension_name, s.lrn,
+           pob.birth_date, pob.address as place_of_birth_address,
+           es.student_id as enrolled_student_id
+    FROM student s
+    LEFT JOIN place_of_birth pob ON s.lrn = pob.lrn
+    LEFT JOIN enrolled_student es ON s.lrn = es.lrn
+    WHERE s.lrn = ?
+');
+$studentStmt->execute([$lrn]);
+$studentResult = $studentStmt->fetch(PDO::FETCH_ASSOC);
 
-// Fetch class and grade info for the current school year
-$classInfo = null;
+// Get class name "DIAMOND" from class table
 $classStmt = $pdo->prepare('
-    SELECT c.class_name, gl.grade_level
-    FROM enrollment e
-    JOIN class c ON e.class_id = c.class_id
-    JOIN grade_level gl ON c.grade_level_id = gl.grade_level_id
-    WHERE e.student_id = (SELECT student_id FROM student WHERE lrn = ? LIMIT 1)
-    ORDER BY e.enrollment_id DESC
+    SELECT class_name
+    FROM class
+    WHERE class_name = "DIAMOND"
     LIMIT 1
 ');
-$classStmt->execute([$lrn]);
-$classInfo = $classStmt->fetch(PDO::FETCH_ASSOC);
+$classStmt->execute();
+$classResult = $classStmt->fetch(PDO::FETCH_ASSOC);
 
-// Temporary: Output raw JSON response for debugging
-echo json_encode([
-    'success' => true,
-    'address' => $result['address'] ?? null,
-    'birth_date' => $result['birth_date'] ?? null,
-    'class_name' => $classInfo['class_name'] ?? null,
-    'grade_level' => $classInfo['grade_level'] ?? null
-]);
-exit;
+// Get grade level "10" from grade_level table
+$gradeStmt = $pdo->prepare('
+    SELECT grade_level
+    FROM grade_level
+    WHERE grade_level = 10
+    LIMIT 1
+');
+$gradeStmt->execute();
+$gradeResult = $gradeStmt->fetch(PDO::FETCH_ASSOC);
 
-if ($result) {
+// Format birth date
+$formattedBirthDate = 'Not available';
+if ($studentResult['birth_date']) {
+    // Try to parse and format the birth date
+    $birthDate = $studentResult['birth_date'];
+    // If it's already in a good format, use it as is
+    if (preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $birthDate)) {
+        $formattedBirthDate = $birthDate;
+    } else {
+        // Try to convert various formats
+        $timestamp = strtotime($birthDate);
+        if ($timestamp) {
+            $formattedBirthDate = date('m/d/Y', $timestamp);
+        } else {
+            $formattedBirthDate = $birthDate; // Use as is if can't parse
+        }
+    }
+}
+
+if ($studentResult) {
     echo json_encode([
         'success' => true,
-        'address' => $result['address'],
-        'birth_date' => $result['birth_date'],
-        'class_name' => $classInfo['class_name'] ?? null,
-        'grade_level' => $classInfo['grade_level'] ?? null
+        'address' => $studentResult['place_of_birth_address'] ?: 'Not available',
+        'birth_date' => $formattedBirthDate,
+        'class_name' => $classResult['class_name'] ?? 'Not available',
+        'grade_level' => $gradeResult['grade_level'] ?? 'Not available'
     ]);
 } else {
     echo json_encode(['success' => false, 'message' => 'No data found for this LRN']);
