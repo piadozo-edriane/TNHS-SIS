@@ -8,6 +8,30 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+#my_button_cancel {
+    margin-top: 10px;
+    width: 100%;
+    background: red;
+    color: white;
+    border: none;
+    padding: 15px 0;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+}
+
+#my_button_cancel:hover {
+    background: rgb(192, 0, 0);
+    transform: translateY(-1px);
+}
+
+#my_button_cancel:active {
+    transform: translateY(0);
+}
+
 #background_cover {
     position: absolute;
     width: 100%;
