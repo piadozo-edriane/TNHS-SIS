@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td>${row.day}</td>
                         <td>${row.minutes}</td>
                         <td>${row.subject_name}</td>
-                        <td>${row.room || ''}</td>
+                        <td>${row.room_number || ''}</td>
                     </tr>`
                 ).join('');
             } else {
