@@ -23,7 +23,7 @@
         exit;
     }
 
-    $valid_password = 'teacher123';
+    $valid_password = '123456';
 
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
