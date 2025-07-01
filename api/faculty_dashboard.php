@@ -132,9 +132,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     exit;
 }
-
-if (!isset($_SESSION['teacher_id'])) {
-    header('Location: login.html');
-    exit;
-}
 ?>

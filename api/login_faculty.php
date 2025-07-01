@@ -23,6 +23,8 @@
         exit;
     }
 
+    $valid_password = 'teacher123';
+
     try {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         
@@ -39,7 +41,7 @@
             exit;
         }
 
-        if ($teacher_password === 'password') {
+        if ($teacher_password === $valid_password) {
             $_SESSION['logged_in'] = true;
             $_SESSION['teacher_id'] = $teacher['teacher_id'];
             $_SESSION['first_name'] = $teacher['first_name'];

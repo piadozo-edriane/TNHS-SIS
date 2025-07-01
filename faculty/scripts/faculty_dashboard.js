@@ -11,7 +11,8 @@ function loadTeacherInfo() {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: 'action=get_teacher_info'
+        body: 'action=get_teacher_info',
+        credentials: 'include' // Ensure session cookies are sent
     })
     .then(response => response.json())
     .then(data => {
@@ -35,7 +36,7 @@ function loadTeacherInfo() {
 }
 
 function updateClassesCount() {
-    fetch('../api/view_classes.php')
+    fetch('../api/view_classes.php', { credentials: 'include' })
         .then(response => response.json())
         .then(data => {
             if (data.success && Array.isArray(data.classes)) {
