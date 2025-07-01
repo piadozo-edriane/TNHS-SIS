@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 $host = 'localhost';
-$dbname = 'final-tnhs-sis'; 
+$dbname = 'improved-tnhs-sis'; 
 $username = 'root';
 $password = '';
 
@@ -39,30 +39,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $birthDate = $birthYear . '-' . str_pad($birthMonth, 2, '0', STR_PAD_LEFT) . '-' . str_pad($birthDay, 2, '0', STR_PAD_LEFT);
     
     try {
-        $stmt = $pdo->prepare("SELECT s.*, es.lrn as enrolled_lrn 
+        $stmt = $pdo->prepare("SELECT s.* 
                               FROM student s 
-                              LEFT JOIN enrolled_student es ON s.lrn = es.lrn 
                               WHERE s.lrn = ? AND s.birth_date = ?");
         $stmt->execute([$lrn, $birthDate]);
         $student = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if ($student) {
-            if ($student['enrolled_lrn']) {
-                echo json_encode([
-                    'success' => true, 
-                    'message' => 'Login successful',
-                    'student' => [
-                        'student_id' => $student['student_id'],
-                        'lrn' => $student['lrn'],
-                        'first_name' => $student['first_name'],
-                        'middle_name' => $student['middle_name'],
-                        'last_name' => $student['last_name'],
-                        'extension_name' => $student['extension_name']
-                    ]
-                ]);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Student is not enrolled']);
-            }
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Login successful',
+                'student' => [
+                    'student_id' => $student['student_id'],
+                    'lrn' => $student['lrn'],
+                    'first_name' => $student['first_name'],
+                    'middle_name' => $student['middle_name'],
+                    'last_name' => $student['last_name'],
+                    'extension_name' => $student['extension_name']
+                ]
+            ]);
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid LRN or birth date']);
         }

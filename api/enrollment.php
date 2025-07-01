@@ -2,7 +2,7 @@
 session_start();
 
 $host = 'localhost';
-$dbname = 'final-tnhs-sis';
+$dbname = 'improved-tnhs-sis';
 $username = 'root';
 $password = '';
 
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->beginTransaction();
 
         // Get sex_id
-        $stmt = $pdo->prepare("SELECT sex_id FROM sexes WHERE sex_name = :sex_name");
+        $stmt = $pdo->prepare("SELECT sex_id FROM sex WHERE sex_name = :sex_name");
         $stmt->execute(['sex_name' => $_POST['sex']]);
         $sex_id = $stmt->fetchColumn();
         if (!$sex_id) {
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get tongue_id
         $tongue_id = null;
         if (!empty($_POST['mother_tongue'])) {
-            $stmt = $pdo->prepare("SELECT tongue_id FROM mother_tongues WHERE tongue_name = :tongue_name");
+            $stmt = $pdo->prepare("SELECT tongue_id FROM mother_tongue WHERE tongue_name = :tongue_name");
             $stmt->execute(['tongue_name' => $_POST['mother_tongue']]);
             $tongue_id = $stmt->fetchColumn();
             if (!$tongue_id) {
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get place_of_birth_id
         $place_of_birth_id = null;
         if (!empty($_POST['place_of_birth'])) {
-            $stmt = $pdo->prepare("SELECT municipality_id FROM municipalities WHERE municipality_name = :municipality_name");
+            $stmt = $pdo->prepare("SELECT municipality_id FROM municipality WHERE municipality_name = :municipality_name");
             $stmt->execute(['municipality_name' => $_POST['place_of_birth']]);
             $place_of_birth_id = $stmt->fetchColumn();
             if (!$place_of_birth_id) {
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Get current_barangay_id
-        $stmt = $pdo->prepare("SELECT barangay_id FROM barangays WHERE barangay_name = :barangay_name");
+        $stmt = $pdo->prepare("SELECT barangay_id FROM barangay WHERE barangay_name = :barangay_name");
         $stmt->execute(['barangay_name' => $_POST['current_barangay']]);
         $current_barangay_id = $stmt->fetchColumn();
         if (!$current_barangay_id) {
@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Get permanent_barangay_id if applicable
         $permanent_barangay_id = null;
         if ($_POST['same_address'] === 'no' && !empty($_POST['permanent_barangay'])) {
-            $stmt = $pdo->prepare("SELECT barangay_id FROM barangays WHERE barangay_name = :barangay_name");
+            $stmt = $pdo->prepare("SELECT barangay_id FROM barangay WHERE barangay_name = :barangay_name");
             $stmt->execute(['barangay_name' => $_POST['permanent_barangay']]);
             $permanent_barangay_id = $stmt->fetchColumn();
             if (!$permanent_barangay_id) {
@@ -156,9 +156,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Insert into enrolled_students table
+        // Insert into enrolled_student table
         $stmt = $pdo->prepare("
-            INSERT INTO enrolled_students (
+            INSERT INTO enrolled_student (
                 psa_birth_cert, lrn, last_name, first_name, middle_name, extension_name,
                 birthdate, sex_id, age, place_of_birth_id, tongue_id, ip_community, ip_specify,
                 four_ps, four_ps_id
@@ -206,9 +206,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Insert into enrollments table
+        // Insert into enrollment table
         $stmt = $pdo->prepare("
-            INSERT INTO enrollments (
+            INSERT INTO enrollment (
                 student_id, school_year, grade_level, lrn_status, returning_status,
                 returning_transfer_status, last_grade_level, last_school_year, last_school_attended,
                 school_id, semester, track_id, strand_id, signature_path, certification_date
@@ -239,7 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Insert current address
         $stmt = $pdo->prepare("
-            INSERT INTO addresses (
+            INSERT INTO address (
                 student_id, address_type, house_no, sitio_street, barangay_id, same_address
             ) VALUES (
                 :student_id, 'current', :house_no, :sitio_street, :barangay_id, :same_address
@@ -256,7 +256,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Insert permanent address if not same as current
         if ($_POST['same_address'] === 'no') {
             $stmt = $pdo->prepare("
-                INSERT INTO addresses (
+                INSERT INTO address (
                     student_id, address_type, house_no, sitio_street, barangay_id
                 ) VALUES (
                     :student_id, 'permanent', :house_no, :sitio_street, :barangay_id
@@ -277,7 +277,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ['type' => 'legal_guardian', 'last_name' => $_POST['guardian_last_name'] ?? null, 'first_name' => $_POST['guardian_first_name'] ?? null, 'middle_name' => $_POST['guardian_middle_name'] ?? null, 'contact' => $_POST['guardian_contact'] ?? null]
         ];
         $stmt = $pdo->prepare("
-            INSERT INTO guardians (
+            INSERT INTO guardian (
                 student_id, guardian_type, last_name, first_name, middle_name, contact
             ) VALUES (
                 :student_id, :guardian_type, :last_name, :first_name, :middle_name, :contact
@@ -299,7 +299,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Insert disabilities
         if ($_POST['disability'] === 'yes' && !empty($_POST['disability_type'])) {
             $stmt = $pdo->prepare("
-                INSERT INTO disabilities (student_id, disability_type) VALUES (:student_id, :disability_type)
+                INSERT INTO disability (student_id, disability_type) VALUES (:student_id, :disability_type)
             ");
             foreach ($_POST['disability_type'] as $type) {
                 $stmt->execute([
@@ -320,7 +320,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'homeschooling' => $_POST['homeschooling'] ?? null
         ];
         $stmt = $pdo->prepare("
-            INSERT INTO learning_modalities (enrollment_id, modality_type) VALUES (:enrollment_id, :modality_type)
+            INSERT INTO learning_modality (enrollment_id, modality_type) VALUES (:enrollment_id, :modality_type)
         ");
         foreach ($modalities as $type => $value) {
             if ($value) {

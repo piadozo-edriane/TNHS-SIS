@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
 $host = 'localhost';
-$dbname = 'final-tnhs-sis';
+$dbname = 'improved-tnhs-sis';
 $username = 'root';
 $password = '';
 
