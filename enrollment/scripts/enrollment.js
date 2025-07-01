@@ -1,28 +1,16 @@
 const API_URL = '../api/enrollment.php';
+const LOCATION_API_URL = '../api/locations.php';
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Sample data for municipalities and barangays (in production, fetch from server)
-    const locationData = {
-        'Cebu': {
-            municipalities: ['Cebu City', 'Mandaue City'],
-            barangays: {
-                'Cebu City': ['Lahug', 'Mabolo'],
-                'Mandaue City': ['Banilad']
-            }
-        },
-        'Davao del Sur': {
-            municipalities: ['Davao City'],
-            barangays: {
-                'Davao City': ['Buhangin']
-            }
-        },
-        'Laguna': {
-            municipalities: ['Santa Rosa'],
-            barangays: {
-                'Santa Rosa': ['Balibago']
-            }
-        }
-    };
+    // Current address dropdowns
+    const currentProvince = document.getElementById('current_province');
+    const currentMunicipality = document.getElementById('current_municipality');
+    const currentBarangay = document.getElementById('current_barangay');
+
+    // Permanent address dropdowns
+    const permanentProvince = document.getElementById('permanent_province');
+    const permanentMunicipality = document.getElementById('permanent_municipality');
+    const permanentBarangay = document.getElementById('permanent_barangay');
 
     // Function to populate dropdown
     function populateDropdown(selectElement, options, defaultOption) {
@@ -35,32 +23,55 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Current address dropdowns
-    const currentProvince = document.getElementById('current_province');
-    const currentMunicipality = document.getElementById('current_municipality');
-    const currentBarangay = document.getElementById('current_barangay');
-
-    // Permanent address dropdowns
-    const permanentProvince = document.getElementById('permanent_province');
-    const permanentMunicipality = document.getElementById('permanent_municipality');
-    const permanentBarangay = document.getElementById('permanent_barangay');
+    // Fetch provinces
+    fetch(LOCATION_API_URL + '?type=provinces')
+        .then(response => response.json())
+        .then(data => {
+            populateDropdown(currentProvince, data, 'Select Province');
+            populateDropdown(permanentProvince, data, 'Select Province');
+        })
+        .catch(error => console.error('Error fetching provinces:', error));
 
     // Update municipalities based on province selection
-    function updateMunicipalities(province, municipalitySelect) {
-        if (province && locationData[province]) {
-            populateDropdown(municipalitySelect, locationData[province].municipalities, 'Select Municipality/City');
-            municipalitySelect.disabled = false;
+    function updateMunicipalities(province, municipalitySelect, barangaySelect) {
+        if (province) {
+            fetch(LOCATION_API_URL + '?type=municipalities&province=' + encodeURIComponent(province))
+                .then(response => response.json())
+                .then(data => {
+                    populateDropdown(municipalitySelect, data, 'Select Municipality/City');
+                    municipalitySelect.disabled = false;
+                    barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+                    barangaySelect.disabled = true;
+                })
+                .catch(error => {
+                    console.error('Error fetching municipalities:', error);
+                    municipalitySelect.innerHTML = '<option value="">Select Municipality/City</option>';
+                    municipalitySelect.disabled = true;
+                    barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+                    barangaySelect.disabled = true;
+                });
         } else {
             municipalitySelect.innerHTML = '<option value="">Select Municipality/City</option>';
             municipalitySelect.disabled = true;
+            barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+            barangaySelect.disabled = true;
         }
     }
 
     // Update barangays based on municipality selection
     function updateBarangays(province, municipality, barangaySelect) {
-        if (province && municipality && locationData[province] && locationData[province].barangays[municipality]) {
-            populateDropdown(barangaySelect, locationData[province].barangays[municipality], 'Select Barangay');
-            barangaySelect.disabled = false;
+        if (province && municipality) {
+            fetch(LOCATION_API_URL + '?type=barangays&province=' + encodeURIComponent(province) + '&municipality=' + encodeURIComponent(municipality))
+                .then(response => response.json())
+                .then(data => {
+                    populateDropdown(barangaySelect, data, 'Select Barangay');
+                    barangaySelect.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error fetching barangays:', error);
+                    barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+                    barangaySelect.disabled = true;
+                });
         } else {
             barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
             barangaySelect.disabled = true;
@@ -70,8 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Current address province change
     currentProvince.addEventListener('change', function() {
         const province = this.value;
-        updateMunicipalities(province, currentMunicipality);
-        updateBarangays(province, currentMunicipality.value, currentBarangay);
+        updateMunicipalities(province, currentMunicipality, currentBarangay);
     });
 
     // Current address municipality change
@@ -82,8 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Permanent address province change
     permanentProvince.addEventListener('change', function() {
         const province = this.value;
-        updateMunicipalities(province, permanentMunicipality);
-        updateBarangays(province, permanentMunicipality.value, permanentBarangay);
+        updateMunicipalities(province, permanentMunicipality, permanentBarangay);
     });
 
     // Permanent address municipality change
