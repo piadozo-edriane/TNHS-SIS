@@ -13,31 +13,18 @@
             <span class="dashboard-title">TNHS-SIS</span>
         </div>
 
-        <nav class="dashboard-nav">
-            <a href="profile.html" class="active">Home</a>
-            <a href="student.html">Student Profile</a>
-            <a href="student_grade.html">Student Grade</a>
-            <a href="class_schedule.html">Class Schedule</a>
-        </nav>
-
-        <div class="dashboard-avatar">
-            <img src="../assets/tnhs-1.png" alt="User Avatar" id="avatarMenuBtn">
+        <div class="dashboard-actions">
+            <button id="logoutBtn" class="logout-button">Logout</button>
         </div>
     </header>
 
     <main class="dashboard-main">
-        <h2>Home</h2>
         <div class="faculty-info">
             <span id="teacherName" class="faculty-name"></span>
         </div>
 
         <h3>Teacher Dashboard</h3>
         <div class="dashboard-cards">
-            <div class="dashboard-card">
-                <h4>Students</h4>
-                <div class="dashboard-value">35</div>
-                <button>View Total Student</button>
-            </div>
 
             <div class="dashboard-card">
                 <h4>Classes</h4>
@@ -46,20 +33,13 @@
             </div>
 
             <div class="dashboard-card">
-                <h4>Grade Status</h4>
+                <h4>Grades</h4>
                 <div class="dashboard-value">15</div>
-                <button>Pending Grades</button>
+                <button>Enter Grades</button>
             </div>
+
         </div>
 
-        <div class="quick-actions">
-            <h4>Quick Actions</h4>
-            <div class="quick-actions-buttons">
-                <button>Add Student Profile</button>
-                <button>Enter Students Grades</button>
-                <button>Manage Class Schedule</button>
-            </div>
-        </div>
     </main>
     <script src="./scripts/faculty_dashboard.js"></script>
 </body>
