@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Dashboard</title>
+    <link rel="stylesheet" href="./styles/administrator_dashboard.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="logo-title">
+            <img src="../assets/tnhs-logo.png" alt="TNHS Logo" class="dashboard-logo">
+            <span class="dashboard-title">TNHS-SIS</span>
+        </div>
+
+        <div class="dashboard-actions">
+            <button id="logoutBtn" class="logout-button">Logout</button>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <h3>Admin Dashboard</h3>
+        <h1>Welcome, Administrator!</h1>
+        <div class="dashboard-cards">
+            <div class="dashboard-card">
+                <h4>Faculty</h4>
+                <div class="dashboard-value" id="facultyCount">Loading...</div>
+                <button>View All Faculty</button>
+            </div>
+
+            <div class="dashboard-card">
+                <h4>Students</h4>
+                <div class="dashboard-value" id="studentCount">Loading...</div>
+                <button>View All Students</button>
+            </div>
+
+            <div class="dashboard-card">
+                <h4>Reports</h4>
+                <div class="dashboard-value" id="reportCount">Loading...</div>
+                <button>View Reports</button>
+            </div>
+        </div>
+    </main>
+    <script src="./scripts/administrator_dashboard.js"></script>
+</body>
+</html>
