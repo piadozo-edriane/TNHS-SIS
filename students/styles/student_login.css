@@ -72,6 +72,10 @@ body {
     color: #666;
 }
 
+h4 {
+    color: blue;
+}
+
 .student-input-container {
     width: 100%;
 }
