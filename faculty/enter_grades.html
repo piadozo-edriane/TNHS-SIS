@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Grades</title>
+    <link rel="stylesheet" href="./styles/faculty_dashboard.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="logo-title">
+            <img src="../assets/tnhs-logo.png" alt="TNHS Logo" class="dashboard-logo">
+            <span class="dashboard-title">TNHS-SIS</span>
+        </div>
+        <div class="dashboard-actions">
+            <button id="logoutBtn" class="logout-button">Logout</button>
+        </div>
+    </header>
+    <div style="display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; box-sizing: border-box;">
+        <div class="faculty-info">
+            <span id="teacherName" class="faculty-name"></span>
+        </div>  
+        <h3>Enter Grades</h3>
+        <div class="dashboard-cards" style="display: flex; justify-content: center; width: 100%; max-width: 1400px; margin: 0 auto;">
+            <div class="dashboard-card" style="width:100%; min-width:1200px; max-width:1400px; margin: 0 auto; box-shadow:none; padding:0; background:none; display: flex; flex-direction: column; align-items: center;">
+                <h4 style="margin-left:8px;">Class Grades Entry</h4>
+                <div style="overflow-x:auto; width: 100%; display: flex; justify-content: center;">
+                <table class="grades-table" style="width:100%; min-width:400px; margin-top:1em; text-align: center;">
+                    <thead>
+                        <tr>
+                            <th>LRN</th>
+                            <th>Class Subject ID</th>
+                            <th>Grades</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gradesTableBody">
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./scripts/enter_grades.js"></script>
+</body>
+</html>

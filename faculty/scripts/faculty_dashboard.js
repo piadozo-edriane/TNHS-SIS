@@ -3,6 +3,7 @@ const API_URL = '../api/faculty_dashboard.php';
 document.addEventListener('DOMContentLoaded', function() {
     loadTeacherInfo();
     updateClassesCount();
+    updateGradesCount();
 });
 
 function loadTeacherInfo() {
@@ -12,7 +13,7 @@ function loadTeacherInfo() {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: 'action=get_teacher_info',
-        credentials: 'include' // Ensure session cookies are sent
+        credentials: 'include' 
     })
     .then(response => response.json())
     .then(data => {
@@ -49,5 +50,22 @@ function updateClassesCount() {
             const countElem = document.getElementById('classesCount');
             if (countElem) countElem.textContent = 'Error';
             console.error('Error fetching class count:', error);
+        });
+}
+
+function updateGradesCount() {
+    fetch('../api/get_grades.php', { credentials: 'include' })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && Array.isArray(data.grades)) {
+                const count = data.grades.length;
+                const countElem = document.querySelector('.dashboard-card:nth-child(2) .dashboard-value');
+                if (countElem) countElem.textContent = count;
+            }
+        })
+        .catch(error => {
+            const countElem = document.querySelector('.dashboard-card:nth-child(2) .dashboard-value');
+            if (countElem) countElem.textContent = 'Error';
+            console.error('Error fetching grades count:', error);
         });
 }
